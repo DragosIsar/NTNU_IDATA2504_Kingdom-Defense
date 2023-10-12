@@ -1,27 +1,48 @@
+using System;
 using UnityEngine;
+using static GameManager;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
-    public LevelSettings levelSettings;
+    [SerializeField] private LevelSettings levelSettings;
 
-    public float baseHealth = 100f;
+    [SerializeField] private float baseHealth = 100f;
 
-    public int inLevelCurrency = 0;
-    private float _levelScore = 0f;
+    public int inLevelCurrency;
+    private float _levelScore;
 
     private Tower[] _towers;
 
-    public GameObject gameManager;
-
     public LayerMask towerPlacementLayerMask;
+    
+    public Enemy enemyPrefab;
+    public Transform enemySpawnPoint;
+    public float enemySpawnInterval = 1f;
+    private float _enemySpawnTimer;
 
     private void Start()
     {
         baseHealth = levelSettings.maxBaseHealth;
-
-        // _towers = GameManager.instance.towers;
     }
 
+    private void Update()
+    {
+        if (_enemySpawnTimer > 0)
+        {
+            _enemySpawnTimer -= Time.deltaTime;
+        }
+        else
+        {
+            SpawnEnemy();
+            _enemySpawnTimer = enemySpawnInterval;
+        }
+    }
+
+    private void SpawnEnemy()
+    {
+        Enemy enemy = Instantiate(enemyPrefab, enemySpawnPoint.position, Quaternion.identity);
+    }
+    
     public void DamageBase(float damage)
     {
         if (baseHealth - damage <= 0)
