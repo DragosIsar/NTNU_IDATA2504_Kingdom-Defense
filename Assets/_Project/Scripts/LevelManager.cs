@@ -4,7 +4,7 @@ using static GameManager;
 
 public class LevelManager : Singleton<LevelManager>
 {
-    [SerializeField] private LevelSettings levelSettings;
+    [SerializeField] private Level level;
 
     [SerializeField] private float baseHealth = 100f;
 
@@ -22,7 +22,8 @@ public class LevelManager : Singleton<LevelManager>
 
     private void Start()
     {
-        baseHealth = levelSettings.maxBaseHealth;
+        baseHealth = level.maxBaseHealth;
+        inLevelCurrency = level.startingCurrency;
     }
 
     private void Update()
@@ -68,12 +69,12 @@ public class LevelManager : Singleton<LevelManager>
 
     private void CalculateScore()
     {
-        _levelScore = (baseHealth / levelSettings.maxBaseHealth) * 100f;
+        _levelScore = (baseHealth / level.maxBaseHealth) * 100f;
     }
 
     public bool TryPlaceTower(Vector3 pos, Tower tower)
     {
-        if (inLevelCurrency >= tower.cost) return false;
+        if (inLevelCurrency >= tower.settings.cost) return false;
         if (IsTowerLocationValid(pos, tower)) return false;
         
         Instantiate(tower, pos, Quaternion.identity);
@@ -82,6 +83,6 @@ public class LevelManager : Singleton<LevelManager>
 
     private bool IsTowerLocationValid(Vector3 pos, Tower tower)
     {
-        return Physics.OverlapSphere(pos, tower.placeRadius, towerPlacementLayerMask).Length > 0;
+        return Physics.OverlapSphere(pos, tower.settings.placeRadius, towerPlacementLayerMask).Length > 0;
     }
 }
