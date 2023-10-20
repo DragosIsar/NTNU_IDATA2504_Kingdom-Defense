@@ -2,19 +2,42 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameManager.Tags;
+using static GameManager;
 
 public class Tower : MonoBehaviour
 {
-    public int cost = 10;
-    public float placeRadius = 10f;
+    public TowerSettings settings;
 
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileSpawnPoint;
-    [SerializeField] private float fireRate = 1f;
+
+    private float _fireRate = 1f;
     private float _fireRateTimer;
-    [SerializeField] private int damage = 1;
+    private int _damage = 1;
+    private int _cost = 10;
+    private float _range = 5f;
     
     private Enemy _target;
+    
+    private SphereCollider _sphereCollider;
+
+    private void Start()
+    {
+        if (settings == null)
+        {
+            Debug.LogError("TowerController: No settings found!");
+            return;
+        }
+        
+        _fireRate = settings.fireRate;
+        _damage = settings.damage;
+        _cost = settings.cost;
+        
+        _range = settings.range;
+        _sphereCollider = GetComponent<SphereCollider>();
+        _sphereCollider.radius = _range;
+    }
     
     private void Update()
     {
@@ -27,7 +50,7 @@ public class Tower : MonoBehaviour
         else
         {
             Fire();
-            _fireRateTimer = 1 / fireRate;
+            _fireRateTimer = 1 / _fireRate;
         }
     }
 
@@ -35,7 +58,7 @@ public class Tower : MonoBehaviour
     {
         if (_target != null) return;
         
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag(ENEMY))
         {
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             if (enemy != null)
@@ -58,6 +81,17 @@ public class Tower : MonoBehaviour
         // set projectile direction
         Projectile p = projectile.GetComponent<Projectile>();
         p.SetVelocity(dir * 10f);
-        p.SetDamage(damage);
+        p.SetDamage(_damage);
+    }
+    
+    public void Upgrade()
+    {
+        _cost += settings.upgradeCostIncrease;
+        
+        _range += settings.rangeIncrease;
+        _sphereCollider.radius = _range;
+        
+        _fireRate += settings.fireRateIncrease;
+        _damage += settings.damageIncrease;
     }
 }

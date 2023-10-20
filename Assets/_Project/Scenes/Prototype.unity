@@ -203,6 +203,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8982743005542703093, guid: c0d30846aab066e4a9234a801d90e2be,
         type: 3}
+      propertyPath: settings
+      value: 
+      objectReference: {fileID: 11400000, guid: da2f185a7f5c2e042bc08f9331b48d6f,
+        type: 2}
+    - target: {fileID: 8982743005542703093, guid: c0d30846aab066e4a9234a801d90e2be,
+        type: 3}
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 7665201919650724481, guid: 64a9e3ea787268f4fb69757fa274ac08,
@@ -349,6 +355,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
+        type: 3}
+      propertyPath: level
+      value: 
+      objectReference: {fileID: 11400000, guid: affb1c82d460a864fb64bde2d2a865a6,
+        type: 2}
     - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
         type: 3}
       propertyPath: enemyPrefab
@@ -934,6 +946,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8982743005542703093, guid: c0d30846aab066e4a9234a801d90e2be,
         type: 3}
+      propertyPath: settings
+      value: 
+      objectReference: {fileID: 11400000, guid: 45517bd6c85659b43b53a5b217575dde,
+        type: 2}
+    - target: {fileID: 8982743005542703093, guid: c0d30846aab066e4a9234a801d90e2be,
+        type: 3}
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 7665201919650724481, guid: 64a9e3ea787268f4fb69757fa274ac08,
@@ -1100,6 +1118,12 @@ PrefabInstance:
       propertyPath: fireRate
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8982743005542703093, guid: c0d30846aab066e4a9234a801d90e2be,
+        type: 3}
+      propertyPath: settings
+      value: 
+      objectReference: {fileID: 11400000, guid: 6d86649896b45b74082a1a77df805bd4,
+        type: 2}
     - target: {fileID: 8982743005542703093, guid: c0d30846aab066e4a9234a801d90e2be,
         type: 3}
       propertyPath: projectilePrefab
