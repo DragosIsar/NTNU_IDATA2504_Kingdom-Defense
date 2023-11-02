@@ -9,6 +9,8 @@ public class InputManager : Singleton<InputManager>
     public InputAction FireAction { private set; get; }
     public InputAction LookAction { private set; get; }
 
+    public static float Zoom => Input.GetAxis("Mouse ScrollWheel");
+
     protected override void Awake()
     {
         base.Awake();
