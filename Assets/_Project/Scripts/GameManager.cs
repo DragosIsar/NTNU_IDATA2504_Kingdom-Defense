@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -79,11 +78,9 @@ public class GameManager : Singleton<GameManager>
         {
             return PlayerPrefs.GetInt(GLOBAL_CURRENCY_KEY);
         }
-        else
-        {
-            PlayerPrefs.SetInt(GLOBAL_CURRENCY_KEY, 0);
-            return 0;
-        }
+
+        PlayerPrefs.SetInt(GLOBAL_CURRENCY_KEY, 0);
+        return 0;
     }
     
     private static void SetGlobalCurrency(int amount)

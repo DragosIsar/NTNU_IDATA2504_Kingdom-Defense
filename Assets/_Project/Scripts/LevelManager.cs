@@ -4,6 +4,8 @@ using static GameManager;
 
 public class LevelManager : Singleton<LevelManager>
 {
+    public event Action<int> OnCurrencyChanged;
+    
     [SerializeField] private Level level;
 
     [SerializeField] private float baseHealth = 100f;
@@ -61,6 +63,13 @@ public class LevelManager : Singleton<LevelManager>
     public void CollectCurrency(int amount)
     {
         inLevelCurrency += amount;
+        OnCurrencyChanged?.Invoke(inLevelCurrency);
+    }
+    
+    public void SpendCurrency(int amount)
+    {
+        inLevelCurrency -= amount;
+        OnCurrencyChanged?.Invoke(inLevelCurrency);
     }
 
     private void EndLevel()
@@ -75,11 +84,11 @@ public class LevelManager : Singleton<LevelManager>
 
     public bool TryPlaceTower(Tower tower, Vector3 pos)
     {
-        if (inLevelCurrency <= tower.settings.cost) return false;
+        if (inLevelCurrency < tower.settings.cost) return false;
         if (IsTowerLocationValid(pos, tower)) return false;
         
         Instantiate(tower, pos, Quaternion.identity);
-        inLevelCurrency -= tower.settings.cost;
+        SpendCurrency(tower.settings.cost);
         return true;
     }
 
