@@ -10,6 +10,9 @@ public class GameManager : Singleton<GameManager>
     
     private List<Tower> _towers = new ();
 
+    public Player Player => _player ? _player : FindObjectOfType<Player>();
+    private Player _player;
+
     public static class Keys
     {
         public const string GLOBAL_CURRENCY_KEY = "GlobalCurrency";
