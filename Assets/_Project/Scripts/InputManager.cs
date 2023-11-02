@@ -6,7 +6,7 @@ public class InputManager : Singleton<InputManager>
     [SerializeField] private PlayerInput playerInput;
     
     public InputAction MoveAction { private set; get; }
-    public InputAction FireAction { private set; get; }
+    public InputAction PlaceTower { private set; get; }
     public InputAction LookAction { private set; get; }
 
     public static float Zoom => Input.GetAxis("Mouse ScrollWheel");
@@ -24,7 +24,7 @@ public class InputManager : Singleton<InputManager>
         }
         
         MoveAction = playerInput.actions["Move"];
-        FireAction = playerInput.actions["Fire"];
+        PlaceTower = playerInput.actions["PlaceTower"];
         LookAction = playerInput.actions["Look"];
     }
 }

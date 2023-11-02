@@ -1,4 +1,12 @@
+using System;
 using UnityEngine;
+using static GameManager.Tags;
+
+public enum PlayerState
+{
+    None,
+    TowerPlacement,
+}
 
 public class Player : MonoBehaviour
 {
@@ -7,16 +15,51 @@ public class Player : MonoBehaviour
     [SerializeField] private float minZoom = 1f;
 
     private Camera _camera;
+    [SerializeField] private PlayerState playerState = PlayerState.TowerPlacement;
+    
+    private Tower _selectedTower;
 
     private void Awake()
     {
         _camera = Camera.main ? Camera.main : GetComponentInChildren<Camera>();
+        _selectedTower = GameManager.Instance.towers[0];
     }
     
     private void Update()
     {
         MoveCamera();
         ZoomCamera();
+
+        switch (playerState)
+        {
+            case PlayerState.None:
+                break;
+            case PlayerState.TowerPlacement:
+                PlaceTowers();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    private void PlaceTowers()
+    {
+        if (!InputManager.Instance.PlaceTower.triggered) return;
+        if (LevelManager.Instance.TryPlaceTower(_selectedTower, MousePositionOnGround()))
+        {
+            //playerState = PlayerState.None;
+        }
+    }
+    
+    private Vector3 MousePositionOnGround()
+    {
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LevelManager.Instance.proTowerPlacementLayerMask))
+        {
+            return hit.point;
+        }
+
+        return Vector3.zero;
     }
 
     private void MoveCamera()

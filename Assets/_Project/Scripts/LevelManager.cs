@@ -13,7 +13,8 @@ public class LevelManager : Singleton<LevelManager>
 
     private Tower[] _towers;
 
-    public LayerMask towerPlacementLayerMask;
+    public LayerMask antiTowerPlacementLayerMask;
+    public LayerMask proTowerPlacementLayerMask;
     
     public Enemy enemyPrefab;
     public Transform enemySpawnPoint;
@@ -72,17 +73,18 @@ public class LevelManager : Singleton<LevelManager>
         _levelScore = (baseHealth / level.maxBaseHealth) * 100f;
     }
 
-    public bool TryPlaceTower(Vector3 pos, Tower tower)
+    public bool TryPlaceTower(Tower tower, Vector3 pos)
     {
-        if (inLevelCurrency >= tower.settings.cost) return false;
+        if (inLevelCurrency <= tower.settings.cost) return false;
         if (IsTowerLocationValid(pos, tower)) return false;
         
         Instantiate(tower, pos, Quaternion.identity);
+        inLevelCurrency -= tower.settings.cost;
         return true;
     }
 
     private bool IsTowerLocationValid(Vector3 pos, Tower tower)
     {
-        return Physics.OverlapSphere(pos, tower.settings.placeRadius, towerPlacementLayerMask).Length > 0;
+        return Physics.CheckSphere(pos, tower.settings.placeRadius, antiTowerPlacementLayerMask);
     }
 }

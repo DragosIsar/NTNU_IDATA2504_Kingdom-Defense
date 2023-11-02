@@ -6,11 +6,11 @@ using static GameManager.Keys;
 
 public class GameManager : Singleton<GameManager>
 {
-    private List<Level> _levels = new ();
+    public List<Level> levels = new ();
     
-    private List<Tower> _towers = new ();
+    public List<Tower> towers = new ();
 
-    public Player Player => _player ? _player : FindObjectOfType<Player>();
+    public Player Player => _player ? _player : FindFirstObjectByType<Player>();
     private Player _player;
 
     public static class Keys
@@ -22,6 +22,7 @@ public class GameManager : Singleton<GameManager>
     {
         public const string TOWER = "Tower";
         public const string ENEMY = "Enemy";
+        public const string GROUND = "Ground";
     }
     
     public static int GlobalCurrency

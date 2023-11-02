@@ -16,8 +16,8 @@ MonoBehaviour:
   range: 5
   fireRate: 1
   damage: 1
-  placeRadius: 10
+  placeRadius: 1
   upgradeCostIncrease: 5
   rangeIncrease: 1
-  fireRateIncrease: 0.1
+  fireRateIncrease: 1
   damageIncrease: 1

@@ -8,7 +8,7 @@ public class TowerSettings : ScriptableObject
     public float range = 5f;
     public float fireRate = 1f;
     public int damage = 1;
-    public float placeRadius = 10f;
+    public float placeRadius = 1f;
     
     [Header("Upgrades")]
     public int upgradeCostIncrease = 5;

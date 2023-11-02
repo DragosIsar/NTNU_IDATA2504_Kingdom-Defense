@@ -374,7 +374,22 @@ PrefabInstance:
       objectReference: {fileID: 1885914804}
     - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
         type: 3}
+      propertyPath: inLevelCurrency
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
+        type: 3}
       propertyPath: towerPlacementLayerMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
+        type: 3}
+      propertyPath: proTowerPlacementLayerMask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
+        type: 3}
+      propertyPath: antiTowerPlacementLayerMask.m_Bits
       value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 3869647472495650051, guid: e1af3560f909b80419676ffdabdb41fc,
@@ -933,7 +948,7 @@ GameObject:
   - component: {fileID: 1655929712}
   - component: {fileID: 1655929711}
   - component: {fileID: 1655929710}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WorldPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1242,6 +1257,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3366013538207266096, guid: 1eba0492a160a1a46b878e2971f2ded4,
+        type: 3}
+      propertyPath: towers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3366013538207266096, guid: 1eba0492a160a1a46b878e2971f2ded4,
+        type: 3}
+      propertyPath: towers.Array.data[0]
+      value: 
+      objectReference: {fileID: 8982743005542703093, guid: c0d30846aab066e4a9234a801d90e2be,
+        type: 3}
     - target: {fileID: 5854506614371447109, guid: 1eba0492a160a1a46b878e2971f2ded4,
         type: 3}
       propertyPath: m_Name
@@ -1313,6 +1339,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041303497723528097, guid: c0d30846aab066e4a9234a801d90e2be,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3220809019012210301, guid: c0d30846aab066e4a9234a801d90e2be,
         type: 3}
