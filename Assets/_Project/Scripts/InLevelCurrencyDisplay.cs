@@ -8,16 +8,12 @@ public class InLevelCurrencyDisplay : MonoBehaviour
     private void Awake()
     {
         _text = GetComponent<TMP_Text>();
+        OnCurrencyChangedHandler(LevelManager.Instance.inLevelCurrency);
     }
     
     private void OnEnable()
     {
         LevelManager.Instance.OnCurrencyChanged += OnCurrencyChangedHandler;
-    }
-    
-    private void OnDisable()
-    {
-        LevelManager.Instance.OnCurrencyChanged -= OnCurrencyChangedHandler;
     }
     
     private void OnCurrencyChangedHandler(int currency)
