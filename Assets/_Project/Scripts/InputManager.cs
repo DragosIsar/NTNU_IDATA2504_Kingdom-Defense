@@ -9,7 +9,11 @@ public class InputManager : Singleton<InputManager>
     public InputAction PlaceTower { private set; get; }
     public InputAction LookAction { private set; get; }
 
-    public static float Zoom => Input.GetAxis("Mouse ScrollWheel");
+    public InputAction Zoom
+    {
+        private set;
+        get;
+    }
 
     protected override void Awake()
     {
@@ -26,5 +30,6 @@ public class InputManager : Singleton<InputManager>
         MoveAction = playerInput.actions["Move"];
         PlaceTower = playerInput.actions["PlaceTower"];
         LookAction = playerInput.actions["Look"];
+        Zoom = playerInput.actions["Zoom"];
     }
 }

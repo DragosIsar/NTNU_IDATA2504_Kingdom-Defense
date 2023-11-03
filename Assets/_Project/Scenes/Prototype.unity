@@ -568,6 +568,7 @@ MonoBehaviour:
   moveSpeed: 8
   maxZoom: 10
   minZoom: 1
+  zoomSpeed: 0.01
   playerState: 1
 --- !u!4 &732666684
 Transform:

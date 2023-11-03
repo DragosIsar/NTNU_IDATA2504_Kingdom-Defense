@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float maxZoom = 10f;
     [SerializeField] private float minZoom = 1f;
+    [SerializeField] private float zoomSpeed = .1f;
 
     private Camera _camera;
     [SerializeField] private PlayerState playerState = PlayerState.TowerPlacement;
@@ -75,7 +76,8 @@ public class Player : MonoBehaviour
 
     private void ZoomCamera()
     {
-        float zoom = InputManager.Zoom;
+        float zoom = InputManager.Instance.Zoom.ReadValue<Vector2>().y;
+        zoom *= zoomSpeed;
         _camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize - zoom, minZoom, maxZoom);
     }
 }

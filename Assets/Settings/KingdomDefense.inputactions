@@ -34,12 +34,12 @@
                 },
                 {
                     "name": "Zoom",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "c796f16d-695c-4ec5-92af-69b000c81135",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -265,8 +265,8 @@
                 },
                 {
                     "name": "",
-                    "id": "fdd172d9-4eb3-4544-86de-8f99c79830b7",
-                    "path": "",
+                    "id": "f715f8d1-cddf-4293-b674-9abc72186f18",
+                    "path": "<Mouse>/scroll",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
