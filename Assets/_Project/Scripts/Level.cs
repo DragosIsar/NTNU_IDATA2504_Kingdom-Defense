@@ -5,8 +5,8 @@ using UnityEngine;
 public class Level : ScriptableObject
 {
     [Header("Scene References")]
-    public string sceneName;
-    public int sceneIndex;
+    public string sceneAssetName;
+    public int sceneIndexInBuildSettings;
     
     [Header("Level Settings")]
     public int maxBaseHealth = 100;
@@ -15,4 +15,10 @@ public class Level : ScriptableObject
     
     public bool isUnlocked;
     public bool isCompleted;
+    
+    [ContextMenu("Unlock Level")]
+    public void UnlockLevel()
+    {
+        isUnlocked = true;
+    }
 }

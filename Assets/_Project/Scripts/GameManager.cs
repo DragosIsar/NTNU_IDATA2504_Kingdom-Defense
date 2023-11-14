@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static GameManager.Keys;
@@ -44,6 +45,8 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
         useDontDestroyOnLoad = true;
+        
+        //LoadLevelData();
     }
     
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -53,13 +56,13 @@ public class GameManager : Singleton<GameManager>
 
     public static void LoadLevel(Level level)
     {
-        if (SceneManager.GetSceneByName(level.sceneName).name !=
-            SceneManager.GetSceneByBuildIndex(level.sceneIndex).name)
+        if (SceneManager.GetSceneByName(level.sceneAssetName).name !=
+            SceneManager.GetSceneByBuildIndex(level.sceneIndexInBuildSettings).name)
         {
             Debug.LogError("Scene name and index do not match");
             return;
         }
-        SceneManager.LoadScene(level.sceneName);
+        SceneManager.LoadScene(level.sceneAssetName);
     }
     
     public static void LoadLevel(string sceneName)
@@ -67,9 +70,59 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(sceneName);
     }
     
-    public static void LoadLevel(int sceneIndex)
+    public void LoadLevel(int sceneIndex)
     {
-        SceneManager.LoadScene(sceneIndex);
+        SceneManager.LoadScene(levels[sceneIndex].sceneAssetName);
+    }
+    
+    private void SafeLevelData ()
+    {
+        foreach (Level level in levels)
+        {
+            if (level.isCompleted)
+            {
+                PlayerPrefs.SetInt(level.name, 2);
+            }
+            else if (level.isUnlocked)
+            {
+                PlayerPrefs.SetInt(level.name, 1);
+            }
+            else
+            {
+                PlayerPrefs.SetInt(level.name, 0);
+            }
+        }
+    }
+    
+    private void LoadLevelData ()
+    {
+        foreach (Level level in levels)
+        {
+            if (PlayerPrefs.HasKey(level.name))
+            {
+                int levelState = PlayerPrefs.GetInt(level.name);
+                switch (levelState)
+                {
+                    case 0:
+                        level.isUnlocked = false;
+                        level.isCompleted = false;
+                        break;
+                    case 1:
+                        level.isUnlocked = true;
+                        level.isCompleted = false;
+                        break;
+                    case 2:
+                        level.isUnlocked = true;
+                        level.isCompleted = true;
+                        break;
+                }
+            }
+            else
+            {
+                level.isUnlocked = false;
+                level.isCompleted = false;
+            }
+        }
     }
     
     private static int GetGlobalCurrency()
@@ -102,5 +155,31 @@ public class GameManager : Singleton<GameManager>
         }
         int currentCurrency = GetGlobalCurrency();
         PlayerPrefs.SetInt(GLOBAL_CURRENCY_KEY, currentCurrency + amount);
+    }
+    
+    public void PlayNextUnlockedLevel()
+    {
+        foreach (Level level in levels.Where(level => level.isUnlocked && !level.isCompleted))
+        {
+            LoadLevel(level);
+            return;
+        }
+    }
+    
+    public void UnlockLevel(Level level)
+    {
+        level.isUnlocked = true;
+        SafeLevelData();
+    }
+    
+    public void CompleteLevel(Level level)
+    {
+        level.isCompleted = true;
+        SafeLevelData();
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

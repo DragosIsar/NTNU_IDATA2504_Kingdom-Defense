@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5480604d57f645a4caa88dae5124c187, type: 3}
   m_Name: Prototype
   m_EditorClassIdentifier: 
-  sceneName: Prototype
-  sceneIndex: 0
+  sceneAssetName: Prototype
+  sceneIndexInBuildSettings: 1
   maxBaseHealth: 100
   startingCurrency: 100
   enemyPrefabs: []
-  isUnlocked: 0
+  isUnlocked: 1
   isCompleted: 0
