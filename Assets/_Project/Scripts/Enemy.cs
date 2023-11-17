@@ -4,29 +4,61 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    [SerializeField] private List<Transform> pathPos;
     
     [SerializeField] private float speed = 1f;
     [SerializeField] private float damage = 1f;
     [SerializeField] private float health = 1f;
+
+    private Rigidbody rb;
+    private int curPosIndex;
     
     private void Start()
     {
-        target = GameObject.FindWithTag("Base").transform;
+        rb = GetComponent<Rigidbody>();
     }
     
     private void Update()
     {
-        if (target == null) return;
-        
-        Vector3 dir = target.position - transform.position;
+        if (IsAtPathPos())
+        {
+            GoToNextPos();
+        }
+        else
+        {
+            MoveToTarget();
+        }
+    }
+
+    public void MoveToTarget()
+    {   
+        Vector3 dir = pathPos[curPosIndex].position - transform.position;
+        dir.y = 0;
+
+        transform.rotation = Quaternion.LookRotation(dir);
+
+        rb.velocity = transform.forward * speed;
+    }
+
+    private bool IsAtPathPos ()
+    {
+        return Vector3.Distance(transform.position, pathPos[curPosIndex].position) < 1f;
+    }
+
+    private void GoToNextPos () {
+        if(curPosIndex < pathPos.Count)
+        {
+            curPosIndex++;
+        }
+    }
+
+    public void TestPathPos()
+    {
+        Vector3 dir = pathPos[1].position - transform.position;
         dir.y = 0;
         GetComponent<Rigidbody>().velocity = dir.normalized * speed;
-    }
-    
-    public void SetTarget(Transform target)
-    {
-        this.target = target;
+        
+        Debug.Log(transform.position);
     }
     
     public void Damage(float damage)
@@ -40,6 +72,11 @@ public class Enemy : MonoBehaviour
         {
             health -= damage;
         }
+    }
+
+    public void InitPath (List<Transform> path)
+    {
+        pathPos = path;
     }
     
     private void Die()

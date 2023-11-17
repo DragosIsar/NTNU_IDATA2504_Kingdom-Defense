@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2481152737120741066}
-  - component: {fileID: -6376489203561332969}
   - component: {fileID: -5572385461012121389}
   - component: {fileID: -1526699772936133850}
+  - component: {fileID: 1663432052407533762}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -35,22 +35,6 @@ Transform:
   - {fileID: 8111738755899062725}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6376489203561332969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6976349222187159874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5c230d1b542d064c866530215b3f695, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 10
-  damage: 1
-  health: 1
 --- !u!54 &-5572385461012121389
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -101,6 +85,22 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1663432052407533762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6976349222187159874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c230d1b542d064c866530215b3f695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathPos: []
+  speed: 1
+  damage: 1
+  health: 1
 --- !u!1001 &4103293893174509351
 PrefabInstance:
   m_ObjectHideFlags: 0

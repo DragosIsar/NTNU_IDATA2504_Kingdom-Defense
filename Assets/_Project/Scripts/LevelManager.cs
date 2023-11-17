@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using static GameManager;
 
 public class LevelManager : Singleton<LevelManager>
@@ -7,7 +9,8 @@ public class LevelManager : Singleton<LevelManager>
     public event Action<int> OnCurrencyChanged;
     
     [SerializeField] private Level level;
-
+    [SerializeField] private List<Transform> pathPos;
+    
     [SerializeField] private float baseHealth = 100f;
 
     public int inLevelCurrency;
@@ -45,6 +48,7 @@ public class LevelManager : Singleton<LevelManager>
     private void SpawnEnemy()
     {
         Enemy enemy = Instantiate(enemyPrefab, enemySpawnPoint.position, Quaternion.identity);
+        enemy.InitPath(pathPos);
     }
     
     public void DamageBase(float damage)
