@@ -5,6 +5,8 @@ using UnityEngine;
 using static GameManager.Tags;
 using static GameManager;
 
+[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(CapsuleCollider))]
 public class Tower : MonoBehaviour
 {
     public TowerSettings settings;
