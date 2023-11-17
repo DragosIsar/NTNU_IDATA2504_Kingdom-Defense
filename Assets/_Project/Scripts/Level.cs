@@ -15,10 +15,4 @@ public class Level : ScriptableObject
     
     public bool isUnlocked;
     public bool isCompleted;
-    
-    [ContextMenu("Unlock Level")]
-    public void UnlockLevel()
-    {
-        isUnlocked = true;
-    }
 }

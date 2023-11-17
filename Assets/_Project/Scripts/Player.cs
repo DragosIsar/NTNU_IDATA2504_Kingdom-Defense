@@ -11,10 +11,10 @@ public enum PlayerState
 public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float maxZoom = 10f;
     [SerializeField] private float minZoom = 1f;
     [SerializeField] private float zoomSpeed = .1f;
 
+    private float _maxZoom;
     private Camera _camera;
     [SerializeField] private PlayerState playerState = PlayerState.TowerPlacement;
     
@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     {
         _camera = Camera.main ? Camera.main : GetComponentInChildren<Camera>();
         _selectedTower = GameManager.Instance.towers[0];
+        _maxZoom = _camera.orthographicSize;
     }
     
     private void Update()
@@ -78,6 +79,6 @@ public class Player : MonoBehaviour
     {
         float zoom = InputManager.Instance.Zoom.ReadValue<Vector2>().y;
         zoom *= zoomSpeed;
-        _camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize - zoom, minZoom, maxZoom);
+        _camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize - zoom, minZoom, _maxZoom);
     }
 }

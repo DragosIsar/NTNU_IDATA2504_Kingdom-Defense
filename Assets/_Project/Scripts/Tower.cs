@@ -20,7 +20,7 @@ public class Tower : MonoBehaviour
     
     private Enemy _target;
     
-    private SphereCollider _sphereCollider;
+    private SphereCollider _sphereCollider; 
 
     private void Start()
     {
@@ -74,13 +74,18 @@ public class Tower : MonoBehaviour
         
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
         
-        // calculate direction to target
-        Vector3 dir = (_target.transform.position + Vector3.up * 0.5f) - projectileSpawnPoint.position;
-        dir = dir.normalized;
+        // calculate the projectile velocity needed to lead and hit the target
+        Vector3 dir = _target.transform.position - projectile.transform.position;
+        float dist = dir.magnitude;
+        float projectileSpeed = 10f;
+        float projectileTravelTime = dist / projectileSpeed;
+        Vector3 targetVelocity = _target.GetComponent<Rigidbody>().velocity;
+        Vector3 targetDisplacement = targetVelocity * projectileTravelTime;
+        dir += targetDisplacement;
         
         // set projectile direction
         Projectile p = projectile.GetComponent<Projectile>();
-        p.SetVelocity(dir * 10f);
+        p.SetVelocity(dir.normalized * projectileSpeed);
         p.SetDamage(_damage);
     }
     

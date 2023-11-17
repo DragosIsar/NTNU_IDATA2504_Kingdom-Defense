@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PrototypeTower
   m_EditorClassIdentifier: 
   cost: 10
-  range: 5
+  range: 30
   fireRate: 1
   damage: 1
-  placeRadius: 1
+  placeRadius: 5
   upgradeCostIncrease: 5
   rangeIncrease: 1
   fireRateIncrease: 1

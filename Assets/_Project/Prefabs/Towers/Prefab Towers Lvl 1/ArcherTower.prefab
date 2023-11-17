@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2061675535994449606}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ShootingPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1121377355461349068}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 9.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42,7 +42,8 @@ GameObject:
   - component: {fileID: 6519715959512825554}
   - component: {fileID: 891327992338228671}
   - component: {fileID: 9095104100465855911}
-  m_Layer: 0
+  - component: {fileID: 5476352424276534508}
+  m_Layer: 6
   m_Name: ArcherTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +80,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 6d86649896b45b74082a1a77df805bd4, type: 2}
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 7665201919650724481, guid: 64a9e3ea787268f4fb69757fa274ac08,
+    type: 3}
   projectileSpawnPoint: {fileID: 2061675535994449606}
 --- !u!135 &9095104100465855911
 SphereCollider:
@@ -96,12 +98,35 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 30
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &5476352424276534508
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4534887720405584737}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.15
+  m_Height: 15.09
+  m_Direction: 1
+  m_Center: {x: 0, y: 7.5, z: 0}
 --- !u!1001 &9045163546701547392
 PrefabInstance:
   m_ObjectHideFlags: 0
