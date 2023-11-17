@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7505766490153394422}
   - component: {fileID: 3205062091304271116}
+  - component: {fileID: 6216920894154972849}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -44,10 +45,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53cc2823e94b04458ab85ff56a3e897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelSettings: {fileID: 11400000, guid: a0c708f75d16ac74abe7012cf79eaf4b, type: 2}
+  level: {fileID: 11400000, guid: affb1c82d460a864fb64bde2d2a865a6, type: 2}
   baseHealth: 100
   inLevelCurrency: 0
-  gameManager: {fileID: 0}
-  towerPlacementLayerMask:
+  antiTowerPlacementLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+  proTowerPlacementLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  enemyPrefab: {fileID: 3827904137834573110, guid: 7595d3c672d47b647ab55a5846eaebe4,
+    type: 3}
+  enemySpawnPoint: {fileID: 0}
+  enemySpawnInterval: 1
+  rotationSpeedInDeg: 6
+  isDay: 1
+--- !u!114 &6216920894154972849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3869647472495650051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 613f2896f08a790469559a79f7cb000d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  directionalLight: {fileID: 0}
+  rotationSpeedInDeg: 6
+  isDay: 1

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -291,7 +291,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.35
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -340,13 +340,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203844586}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &638155713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -357,46 +357,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
         type: 3}
-      propertyPath: level
-      value: 
-      objectReference: {fileID: 11400000, guid: affb1c82d460a864fb64bde2d2a865a6,
-        type: 2}
-    - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
-        type: 3}
-      propertyPath: enemyPrefab
-      value: 
-      objectReference: {fileID: 3827904137834573110, guid: 7595d3c672d47b647ab55a5846eaebe4,
-        type: 3}
-    - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
-        type: 3}
       propertyPath: enemySpawnPoint
       value: 
       objectReference: {fileID: 1885914804}
-    - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
-        type: 3}
-      propertyPath: inLevelCurrency
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
-        type: 3}
-      propertyPath: towerPlacementLayerMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
-        type: 3}
-      propertyPath: proTowerPlacementLayerMask.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
-        type: 3}
-      propertyPath: antiTowerPlacementLayerMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
     - target: {fileID: 3869647472495650051, guid: e1af3560f909b80419676ffdabdb41fc,
         type: 3}
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6216920894154972849, guid: e1af3560f909b80419676ffdabdb41fc,
+        type: 3}
+      propertyPath: directionalLight
+      value: 
+      objectReference: {fileID: 203844586}
     - target: {fileID: 7505766490153394422, guid: e1af3560f909b80419676ffdabdb41fc,
         type: 3}
       propertyPath: m_LocalPosition.x
