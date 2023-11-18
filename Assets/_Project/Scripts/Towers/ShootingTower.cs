@@ -40,7 +40,7 @@ public class ShootingTower : Tower
         dir += targetDisplacement;
         
         // set projectile direction
-        p.SetVelocityWithDirection(dir.normalized);
+        p.SetDirection(dir.normalized);
         p.SetDamage(settings.damage);
     }
 }

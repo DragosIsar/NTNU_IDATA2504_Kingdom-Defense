@@ -14,6 +14,11 @@ public class Projectile : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
     
+    private void Update()
+    {
+        _rigidbody.velocity = transform.forward * speed;
+    }
+    
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Enemy"))
@@ -32,9 +37,9 @@ public class Projectile : MonoBehaviour
         _damage = damage;
     }
     
-    public void SetVelocityWithDirection(Vector3 direction)
+    public void SetDirection(Vector3 direction)
     {
-        _rigidbody.velocity = direction.normalized * speed;
+        transform.rotation = Quaternion.LookRotation(direction);
     }
     
     public float GetSpeed()
