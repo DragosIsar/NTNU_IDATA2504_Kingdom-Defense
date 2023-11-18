@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1526699772936133850}
   - component: {fileID: 1663432052407533762}
   m_Layer: 3
-  m_Name: Enemy
+  m_Name: AxeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

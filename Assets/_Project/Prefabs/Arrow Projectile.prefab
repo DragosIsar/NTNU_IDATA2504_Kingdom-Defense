@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 2558027280423277947}
   - component: {fileID: 8081012608143732107}
   m_Layer: 8
-  m_Name: ArrowSmall
+  m_Name: Arrow Projectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -442,7 +442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f577cee147ec5af4b810831e68430596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 30
 --- !u!136 &8081012608143732107
 CapsuleCollider:
   m_ObjectHideFlags: 0

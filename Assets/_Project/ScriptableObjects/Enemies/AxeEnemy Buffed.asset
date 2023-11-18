@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3bd51fb159c8d54496a5cfe70432799, type: 3}
-  m_Name: DefaultEnemy
+  m_Name: AxeEnemy Buffed
   m_EditorClassIdentifier: 
-  speed: 1
-  damage: 1
-  health: 1
+  speed: 2
+  damage: 2
+  health: 5
+  reward: 3
+  deathEffect: {fileID: 7581132033923737324, guid: 70a3fedfbc4391b4aa05fa6cca5a7017,
+    type: 3}

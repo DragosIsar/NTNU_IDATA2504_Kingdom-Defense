@@ -18,5 +18,12 @@ MonoBehaviour:
   startingCurrency: 10
   enemyPrefabs:
   - {fileID: 1663432052407533762, guid: c33f005c7083f4b4daf31d61ab02b605, type: 3}
+  - {fileID: 1663432052407533762, guid: c33f005c7083f4b4daf31d61ab02b605, type: 3}
+  - {fileID: 1663432052407533762, guid: c33f005c7083f4b4daf31d61ab02b605, type: 3}
+  - {fileID: 1663432052407533762, guid: c33f005c7083f4b4daf31d61ab02b605, type: 3}
+  - {fileID: 1663432052407533762, guid: 0e239f7153af0cd4c9570dcef778a5bf, type: 3}
+  spawnInterval: 5
+  spawnIntervalMultiplier: 0.9
   isUnlocked: 1
   isCompleted: 0
+  levelToUnlock: {fileID: 0}

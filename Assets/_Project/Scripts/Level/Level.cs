@@ -12,7 +12,11 @@ public class Level : ScriptableObject
     public int maxBaseHealth = 100;
     public int startingCurrency = 100;
     public Enemy[] enemyPrefabs;
+    public float spawnInterval = 5f;
+    public float spawnIntervalMultiplier = 0.9f;
     
     public bool isUnlocked;
     public bool isCompleted;
+    
+    public Level levelToUnlock;
 }

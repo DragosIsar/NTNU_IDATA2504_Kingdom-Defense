@@ -27,12 +27,14 @@ public class LevelManager : Singleton<LevelManager>
     public Transform enemySpawnPoint;
     public float enemySpawnInterval = 1f;
     private float _enemySpawnTimer;
+    private int _enemyCount;
 
     protected override void Awake()
     {
         base.Awake();
         baseHealth = level.maxBaseHealth;
         inLevelCurrency = level.startingCurrency;
+        enemySpawnInterval = level.spawnInterval;
     }
 
     private void Update()
@@ -44,6 +46,7 @@ public class LevelManager : Singleton<LevelManager>
         else
         {
             SpawnEnemy();
+            IncreaseSpawnInterval();    
             _enemySpawnTimer = enemySpawnInterval;
         }
     }
@@ -52,6 +55,16 @@ public class LevelManager : Singleton<LevelManager>
     {
         Enemy enemy = Instantiate(level.enemyPrefabs[Random.Range(0, level.enemyPrefabs.Length)], enemySpawnPoint.position, Quaternion.identity);
         enemy.InitPath(pathPos);
+        
+        _enemyCount++;
+    }
+    
+    private void IncreaseSpawnInterval()
+    {
+        if (_enemyCount % 5 == 0)
+        {
+            enemySpawnInterval *= level.spawnIntervalMultiplier;
+        }
     }
     
     public void DamageBase(int damage)
