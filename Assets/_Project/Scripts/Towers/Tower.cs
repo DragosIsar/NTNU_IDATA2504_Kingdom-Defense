@@ -10,17 +10,10 @@ using static GameManager;
 public class Tower : MonoBehaviour
 {
     public TowerSettings settings;
-
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private Transform projectileSpawnPoint;
-
-    private float _fireRate = 1f;
-    private float _fireRateTimer;
-    private int _damage = 1;
-    private int _cost = 10;
-    private float _range = 5f;
     
-    private Enemy _target;
+    private float _attackRate = 1f;
+    private float _attackRateTimer;
+    private float _range = 5f;
     
     private SphereCollider _sphereCollider; 
 
@@ -32,10 +25,7 @@ public class Tower : MonoBehaviour
             return;
         }
         
-        _fireRate = settings.fireRate;
-        _damage = settings.damage;
-        _cost = settings.cost;
-        
+        _attackRate = settings.attackRate;
         _range = settings.range;
         _sphereCollider = GetComponent<SphereCollider>();
         _sphereCollider.radius = _range;
@@ -43,61 +33,24 @@ public class Tower : MonoBehaviour
     
     private void Update()
     {
-        if (_target == null) return;
-        
-        if (_fireRateTimer > 0)
+        if (_attackRateTimer > 0)
         {
-            _fireRateTimer -= Time.deltaTime;
+            _attackRateTimer -= Time.deltaTime;
         }
         else
         {
-            Fire();
-            _fireRateTimer = 1 / _fireRate;
+            Attack();
+            _attackRateTimer = 1 / _attackRate;
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    protected virtual void OnTriggerStay(Collider other)
     {
-        if (_target != null) return;
         
-        if (other.gameObject.CompareTag(ENEMY))
-        {
-            Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                _target = enemy;
-            }
-        }
     }
 
-    private void Fire()
+    protected virtual void Attack()
     {
-        if (_target == null) return;
         
-        GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-        Projectile p = projectile.GetComponent<Projectile>();
-        
-        // calculate the projectile velocity needed to lead and hit the target
-        Vector3 dir = _target.GetHitPoint() - projectile.transform.position;
-        float dist = dir.magnitude;
-        float projectileTravelTime = dist / p.GetSpeed();
-        Vector3 targetVelocity = _target.GetVelocity();
-        Vector3 targetDisplacement = targetVelocity * projectileTravelTime;
-        dir += targetDisplacement;
-        
-        // set projectile direction
-        p.SetVelocityWithDirection(dir.normalized);
-        p.SetDamage(_damage);
-    }
-    
-    public void Upgrade()
-    {
-        _cost += settings.upgradeCostIncrease;
-        
-        _range += settings.rangeIncrease;
-        _sphereCollider.radius = _range;
-        
-        _fireRate += settings.fireRateIncrease;
-        _damage += settings.damageIncrease;
     }
 }
