@@ -75,19 +75,18 @@ public class Tower : MonoBehaviour
         if (_target == null) return;
         
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+        Projectile p = projectile.GetComponent<Projectile>();
         
         // calculate the projectile velocity needed to lead and hit the target
-        Vector3 dir = _target.transform.position - projectile.transform.position;
+        Vector3 dir = _target.GetHitPoint() - projectile.transform.position;
         float dist = dir.magnitude;
-        float projectileSpeed = 10f;
-        float projectileTravelTime = dist / projectileSpeed;
-        Vector3 targetVelocity = _target.GetComponent<Rigidbody>().velocity;
+        float projectileTravelTime = dist / p.GetSpeed();
+        Vector3 targetVelocity = _target.GetVelocity();
         Vector3 targetDisplacement = targetVelocity * projectileTravelTime;
         dir += targetDisplacement;
         
         // set projectile direction
-        Projectile p = projectile.GetComponent<Projectile>();
-        p.SetVelocity(dir.normalized * projectileSpeed);
+        p.SetVelocityWithDirection(dir.normalized);
         p.SetDamage(_damage);
     }
     

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.UI;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private Animator animator;
+    [SerializeField] private Transform hitPointTransform;
 
     private int _currentHealth;
     
@@ -83,5 +85,15 @@ public class Enemy : MonoBehaviour
             LevelManager.Instance.DamageBase(enemyType.damage);
             Die();
         }
+    }
+
+    public Vector3 GetHitPoint()
+    {
+        return hitPointTransform ? hitPointTransform.position : transform.position + Vector3.up;
+    }
+
+    public Vector3 GetVelocity()
+    {
+        return _rigidbody.velocity;
     }
 }

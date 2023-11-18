@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] private float speed = 10f;
     private int _damage = 1;
-    
     private Rigidbody _rigidbody;
     
     
@@ -32,8 +32,13 @@ public class Projectile : MonoBehaviour
         _damage = damage;
     }
     
-    public void SetVelocity(Vector3 velocity)
+    public void SetVelocityWithDirection(Vector3 direction)
     {
-        _rigidbody.velocity = velocity;
+        _rigidbody.velocity = direction.normalized * speed;
+    }
+    
+    public float GetSpeed()
+    {
+        return speed;
     }
 }
