@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.VFX;
 
 public class Enemy : MonoBehaviour
 {
@@ -75,6 +76,12 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         LevelManager.Instance.CollectCurrency(enemyType.reward);
+        if (enemyType.deathEffect != null)
+        {
+            VisualEffect deathEffect = Instantiate(enemyType.deathEffect, transform.position + Vector3.up, Quaternion.identity);
+            deathEffect.Play();
+            Destroy(deathEffect.gameObject, 3f);
+        }
         Destroy(gameObject);
     }
     
