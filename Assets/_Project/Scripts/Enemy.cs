@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private List<Transform> pathPos;
-    
-    [SerializeField] private float speed = 1f;
-    [SerializeField] private float damage = 1f;
-    [SerializeField] private float health = 1f;
+    [SerializeField] private EnemyType enemyType;
+    [SerializeField] private Animator animator;
 
-    private Rigidbody rb;
-    private int curPosIndex;
+    private int _currentHealth;
+    
+    private Rigidbody _rigidbody;
+    private int _targetIndex;
+    private List<Transform> _pathPositions;
     
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        _currentHealth = enemyType.health;
+        animator ??= GetComponentInChildren<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
     
     private void Update()
     {
-        if (IsAtPathPos())
+        if (IsAtTarget())
         {
-            GoToNextPos();
+            SwitchToNextTarget();
         }
         else
         {
@@ -30,53 +32,43 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void MoveToTarget()
+    private void MoveToTarget()
     {   
-        Vector3 dir = pathPos[curPosIndex].position - transform.position;
+        Vector3 dir = _pathPositions[_targetIndex].position - transform.position;
         dir.y = 0;
 
         transform.rotation = Quaternion.LookRotation(dir);
 
-        rb.velocity = transform.forward * speed;
+        _rigidbody.velocity = transform.forward * enemyType.speed;
     }
 
-    private bool IsAtPathPos ()
+    private bool IsAtTarget ()
     {
-        return Vector3.Distance(transform.position, pathPos[curPosIndex].position) < 1f;
+        return Vector3.Distance(transform.position, _pathPositions[_targetIndex].position) < 1f;
     }
 
-    private void GoToNextPos () {
-        if(curPosIndex < pathPos.Count)
-        {
-            curPosIndex++;
-        }
-    }
-
-    public void TestPathPos()
+    private void SwitchToNextTarget ()
     {
-        Vector3 dir = pathPos[1].position - transform.position;
-        dir.y = 0;
-        GetComponent<Rigidbody>().velocity = dir.normalized * speed;
-        
-        Debug.Log(transform.position);
+        if (_targetIndex >= _pathPositions.Count) return;
+        _targetIndex++;
     }
     
-    public void Damage(float damage)
+    public void Damage(int damage)
     {
-        if (health - damage <= 0)
+        if (_currentHealth - damage <= 0)
         {
-            health = 0;
+            _currentHealth = 0;
             Die();
         }
         else
         {
-            health -= damage;
+            _currentHealth -= damage;
         }
     }
 
     public void InitPath (List<Transform> path)
     {
-        pathPos = path;
+        _pathPositions = path;
     }
     
     private void Die()
@@ -88,7 +80,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Base"))
         {
-            LevelManager.Instance.DamageBase(damage);
+            LevelManager.Instance.DamageBase(enemyType.damage);
             Die();
         }
     }
