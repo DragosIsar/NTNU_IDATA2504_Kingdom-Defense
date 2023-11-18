@@ -36,6 +36,7 @@ public class HUD : MonoBehaviour
                     LevelManager.Instance.SetTowerToPlace(tower);
                 }
             });
+            toggle.GetComponent<TowerToggleUI>().SetIcon(tower.settings.icon);
             _towerPlacementToggles.Add(toggle);
         });
     }

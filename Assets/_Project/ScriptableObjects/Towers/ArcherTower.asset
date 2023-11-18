@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28cccb03be895ae439a547597d6ab1e9, type: 3}
-  m_Name: PrototypeTower
+  m_Name: ArcherTower
   m_EditorClassIdentifier: 
   cost: 10
   range: 30
@@ -21,3 +21,4 @@ MonoBehaviour:
   rangeIncrease: 1
   fireRateIncrease: 1
   damageIncrease: 1
+  icon: {fileID: 21300000, guid: b61a36370cdcde14ea58363b27d1e9ce, type: 3}

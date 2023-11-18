@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5480604d57f645a4caa88dae5124c187, type: 3}
+  m_Name: Level 1
+  m_EditorClassIdentifier: 
+  sceneAssetName: Prototype
+  sceneIndexInBuildSettings: 1
+  maxBaseHealth: 100
+  startingCurrency: 10
+  enemyPrefabs:
+  - {fileID: 1663432052407533762, guid: c33f005c7083f4b4daf31d61ab02b605, type: 3}
+  isUnlocked: 1
+  isCompleted: 0

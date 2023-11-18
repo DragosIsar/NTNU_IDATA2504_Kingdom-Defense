@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using static GameManager;
+using Random = UnityEngine.Random;
 
 public class LevelManager : Singleton<LevelManager>
 {
@@ -17,13 +18,12 @@ public class LevelManager : Singleton<LevelManager>
     public int inLevelCurrency;
     private float _levelScore;
 
-    private Tower[] _towers;
+    private List<Tower> _towers;
     private Tower _towerToPlace;
 
     public LayerMask antiTowerPlacementLayerMask;
     public LayerMask proTowerPlacementLayerMask;
     
-    public Enemy enemyPrefab;
     public Transform enemySpawnPoint;
     public float enemySpawnInterval = 1f;
     private float _enemySpawnTimer;
@@ -50,7 +50,7 @@ public class LevelManager : Singleton<LevelManager>
 
     private void SpawnEnemy()
     {
-        Enemy enemy = Instantiate(enemyPrefab, enemySpawnPoint.position, Quaternion.identity);
+        Enemy enemy = Instantiate(level.enemyPrefabs[Random.Range(0, level.enemyPrefabs.Length)], enemySpawnPoint.position, Quaternion.identity);
         enemy.InitPath(pathPos);
     }
     
