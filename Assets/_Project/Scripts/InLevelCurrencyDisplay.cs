@@ -5,7 +5,7 @@ public class InLevelCurrencyDisplay : MonoBehaviour
 {
     private TMP_Text _text;
     
-    private void Awake()
+    private void Start()
     {
         _text = GetComponent<TMP_Text>();
         OnCurrencyChangedHandler(LevelManager.Instance.inLevelCurrency);

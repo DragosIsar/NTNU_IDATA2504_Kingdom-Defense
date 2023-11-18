@@ -72,6 +72,7 @@ public class Enemy : MonoBehaviour
     
     private void Die()
     {
+        LevelManager.Instance.CollectCurrency(enemyType.reward);
         Destroy(gameObject);
     }
     

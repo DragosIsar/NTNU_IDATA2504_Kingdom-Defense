@@ -7,11 +7,12 @@ using static GameManager;
 public class LevelManager : Singleton<LevelManager>
 {
     public event Action<int> OnCurrencyChanged;
+    public Action<int> onHealthChanged;
     
     [SerializeField] private Level level;
     [SerializeField] private List<Transform> pathPos;
     
-    [SerializeField] private float baseHealth = 100f;
+    [SerializeField] private int baseHealth = 100;
 
     public int inLevelCurrency;
     private float _levelScore;
@@ -26,8 +27,9 @@ public class LevelManager : Singleton<LevelManager>
     public float enemySpawnInterval = 1f;
     private float _enemySpawnTimer;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         baseHealth = level.maxBaseHealth;
         inLevelCurrency = level.startingCurrency;
     }
@@ -51,7 +53,7 @@ public class LevelManager : Singleton<LevelManager>
         enemy.InitPath(pathPos);
     }
     
-    public void DamageBase(float damage)
+    public void DamageBase(int damage)
     {
         if (baseHealth - damage <= 0)
         {
@@ -62,6 +64,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             baseHealth -= damage;
         }
+        onHealthChanged?.Invoke(baseHealth);
     }
 
     public void CollectCurrency(int amount)
@@ -99,5 +102,10 @@ public class LevelManager : Singleton<LevelManager>
     private bool IsTowerLocationValid(Vector3 pos, Tower tower)
     {
         return Physics.CheckSphere(pos, tower.settings.placeRadius, antiTowerPlacementLayerMask);
+    }
+
+    public int GetBaseHealth()
+    {
+        return baseHealth;
     }
 }
