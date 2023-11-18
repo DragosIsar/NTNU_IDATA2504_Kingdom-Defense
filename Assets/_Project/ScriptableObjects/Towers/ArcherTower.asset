@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 10
   range: 30
-  attackRate: 0.5
+  attackRate: 0.333
   damage: 1
   placeRadius: 5
   upgradeCostIncrease: 5

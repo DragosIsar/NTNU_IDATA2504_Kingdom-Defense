@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,34 +9,17 @@ public class ShootingTower : Tower
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileSpawnPoint;
     
-    private Enemy _target;
-    
-    protected override void OnTriggerStay(Collider other)
-    {
-        if (_target != null) return;
-        
-        if (other.gameObject.CompareTag(ENEMY))
-        {
-            Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                _target = enemy;
-            }
-        }
-    }
 
-    protected override void Attack()
+    protected override void Attack(Enemy enemy)
     {
-        if (_target == null) return;
-        
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
         Projectile p = projectile.GetComponent<Projectile>();
         
         // calculate the projectile velocity needed to lead and hit the target
-        Vector3 dir = _target.GetHitPoint() - projectile.transform.position;
+        Vector3 dir = enemy.GetHitPoint() - projectile.transform.position;
         float dist = dir.magnitude;
         float projectileTravelTime = dist / p.GetSpeed();
-        Vector3 targetVelocity = _target.GetVelocity();
+        Vector3 targetVelocity = enemy.GetVelocity();
         Vector3 targetDisplacement = targetVelocity * projectileTravelTime;
         dir += targetDisplacement;
         

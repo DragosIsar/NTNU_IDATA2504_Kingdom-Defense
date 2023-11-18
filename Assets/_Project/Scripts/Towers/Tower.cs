@@ -15,6 +15,8 @@ public class Tower : MonoBehaviour
     private float _attackRateTimer;
     private float _range = 5f;
     
+    private List<Enemy> _targets = new();
+    
     private SphereCollider _sphereCollider; 
 
     private void Start()
@@ -30,7 +32,34 @@ public class Tower : MonoBehaviour
         _sphereCollider = GetComponent<SphereCollider>();
         _sphereCollider.radius = _range;
     }
+
+    protected void OnTriggerStay(Collider other)
+    {
+        if (!other.CompareTag(ENEMY)) return;
+        if (!other.TryGetComponent(out Enemy enemy)) return;
+        
+        if (!_targets.Contains(enemy))
+        {
+            _targets.Add(enemy);
+            enemy.OnDeath += () =>
+            {
+                _targets.Remove(enemy);
+                OrderListByHealth();
+            };
+        }
+    }
     
+    protected void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag(ENEMY)) return;
+        if (!other.TryGetComponent(out Enemy enemy)) return;
+        
+        if (_targets.Contains(enemy))
+        {
+            _targets.Remove(enemy);
+        }
+    }
+
     private void Update()
     {
         if (_attackRateTimer > 0)
@@ -39,18 +68,19 @@ public class Tower : MonoBehaviour
         }
         else
         {
-            Attack();
+            if (_targets.Count != 0) Attack(_targets[0]);
             _attackRateTimer = 1 / _attackRate;
         }
     }
 
-    protected virtual void OnTriggerStay(Collider other)
+    protected virtual void Attack(Enemy enemy)
     {
         
     }
-
-    protected virtual void Attack()
+    
+    protected void OrderListByHealth()
     {
-        
+        _targets.Sort((enemy1, enemy2) => enemy1.GetHealth().CompareTo(enemy2.GetHealth()));
+        _targets.Reverse();
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,13 @@ using UnityEngine.VFX;
 
 public class Enemy : MonoBehaviour
 {
+    public event Action OnDeath;
+    
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private Animator animator;
     [SerializeField] private Transform hitPointTransform;
 
     private int _currentHealth;
-    
     private Rigidbody _rigidbody;
     private int _targetIndex;
     private List<Transform> _pathPositions;
@@ -75,6 +77,7 @@ public class Enemy : MonoBehaviour
     
     private void Die()
     {
+        OnDeath?.Invoke();
         LevelManager.Instance.CollectCurrency(enemyType.reward);
         if (enemyType.deathEffect != null)
         {
@@ -102,5 +105,10 @@ public class Enemy : MonoBehaviour
     public Vector3 GetVelocity()
     {
         return _rigidbody.velocity;
+    }
+
+    public int GetHealth()
+    {
+        return _currentHealth;
     }
 }
