@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,9 +9,12 @@ public class HUD : MonoBehaviour
     [Header("TowerPlacement")]
     [SerializeField] private Toggle towerPlacementTogglePrefab;
     [SerializeField] private RectTransform towerPlacementPanel;
+    [SerializeField] private TMP_Text statusText;
     
     private List<Toggle> _towerPlacementToggles = new();
     private ToggleGroup _toggleGroup;
+    
+    private Coroutine _statusTextCoroutine;
     
     private void Awake()
     {
@@ -19,6 +23,7 @@ public class HUD : MonoBehaviour
     
     private void Start()
     {
+        statusText.text = "";
         CreateTowerPlacementToggles();
     }
     
@@ -44,5 +49,22 @@ public class HUD : MonoBehaviour
     public void SwitchOffAllToggles()
     {
         _towerPlacementToggles.ForEach(toggle => toggle.isOn = false);
+    }
+    
+    public void SetStatusText(string text, float duration)
+    {
+        if (_statusTextCoroutine != null)
+        {
+            StopCoroutine(_statusTextCoroutine);
+        }
+        
+        _statusTextCoroutine = StartCoroutine(SetStatusTextCoroutine(text, duration));
+    }
+    
+    private IEnumerator SetStatusTextCoroutine(string text, float duration)
+    {
+        statusText.text = text;
+        yield return new WaitForSeconds(duration);
+        statusText.text = "";
     }
 }

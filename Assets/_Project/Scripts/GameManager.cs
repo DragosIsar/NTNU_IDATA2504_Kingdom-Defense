@@ -12,6 +12,9 @@ public class GameManager : Singleton<GameManager>
 
     public Player Player => _player ? _player : FindFirstObjectByType<Player>();
     private Player _player;
+    
+    public HUD HUD => _hud ? _hud : FindFirstObjectByType<HUD>();
+    private HUD _hud;
 
     public static class Keys
     {

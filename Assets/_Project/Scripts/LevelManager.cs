@@ -92,9 +92,18 @@ public class LevelManager : Singleton<LevelManager>
 
     public bool TryPlaceTower(Tower tower, Vector3 pos)
     {
-        if (inLevelCurrency < tower.settings.cost) return false;
-        if (IsTowerLocationValid(pos, tower)) return false;
-        
+        if (inLevelCurrency < tower.settings.cost)
+        {
+            SetStatusText("Not enough currency!");
+            return false;
+        }
+
+        if (IsTowerLocationValid(pos, tower))
+        {
+            SetStatusText("Not enough space!");
+            return false;
+        }
+
         Instantiate(tower, pos, Quaternion.identity);
         SpendCurrency(tower.settings.cost);
         return true;
@@ -114,5 +123,10 @@ public class LevelManager : Singleton<LevelManager>
     {
         _towerToPlace = tower;
         GameManager.Instance.Player.SetPlayerState(PlayerState.TowerPlacement);
+    }
+    
+    public static void SetStatusText(string text, float duration = 2f)
+    {
+        GameManager.Instance.HUD.SetStatusText(text, duration);
     }
 }
