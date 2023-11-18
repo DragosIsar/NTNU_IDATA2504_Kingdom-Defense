@@ -18,6 +18,7 @@ public class LevelManager : Singleton<LevelManager>
     private float _levelScore;
 
     private Tower[] _towers;
+    private Tower _towerToPlace;
 
     public LayerMask antiTowerPlacementLayerMask;
     public LayerMask proTowerPlacementLayerMask;
@@ -107,5 +108,11 @@ public class LevelManager : Singleton<LevelManager>
     public int GetBaseHealth()
     {
         return baseHealth;
+    }
+
+    public void SetTowerToPlace(Tower tower)
+    {
+        _towerToPlace = tower;
+        GameManager.Instance.Player.SetPlayerState(PlayerState.TowerPlacement);
     }
 }
