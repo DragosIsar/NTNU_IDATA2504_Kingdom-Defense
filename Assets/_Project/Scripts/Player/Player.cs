@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using LRS;
 using static GameManager.Tags;
 
 public enum PlayerState

@@ -1,11 +1,11 @@
 {
   "dependencies": {
-    "com.leonhardrobin": {
+    "com.lrs.tools": {
       "version": "https://github.com/leonhardrobin/unity-tools.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "717e786b5e530f9bb1a12f5ef7173964a375a14d"
+      "hash": "b0bdf2a3beb153ab6ebf7085015245bd6fdbae88"
     },
     "com.unity.burst": {
       "version": "1.8.8",

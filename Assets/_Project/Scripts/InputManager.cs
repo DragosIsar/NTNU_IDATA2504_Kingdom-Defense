@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using LRS;
 
 public class InputManager : Singleton<InputManager>
 {

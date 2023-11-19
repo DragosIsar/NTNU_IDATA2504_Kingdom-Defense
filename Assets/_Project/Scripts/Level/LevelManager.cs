@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using static GameManager;
 using Random = UnityEngine.Random;
+using LRS;
 
 public class LevelManager : Singleton<LevelManager>
 {
@@ -61,7 +62,7 @@ public class LevelManager : Singleton<LevelManager>
     
     private void IncreaseSpawnInterval()
     {
-        if (_enemyCount % 5 == 0)
+        if (_enemyCount % 12 == 0)
         {
             enemySpawnInterval *= level.spawnIntervalMultiplier;
         }

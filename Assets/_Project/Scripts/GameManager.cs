@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static GameManager.Keys;
+using LRS;
 
 public class GameManager : Singleton<GameManager>
 {
