@@ -49,8 +49,16 @@ public class Player : MonoBehaviour
 
     private void PlaceTowers()
     {
-        if (!InputManager.Instance.PlaceTower.triggered) return;
-        if (LevelManager.Instance.TryPlaceTower(_selectedTower, MousePositionOnGround()))
+        if (InputManager.Instance.PlaceTower.triggered)
+        {
+            if (GameManager.CursorAboveUI) return;
+            if (LevelManager.Instance.TryPlaceTower(_selectedTower, MousePositionOnGround()))
+            {
+                SetPlayerState(PlayerState.None);
+            }
+        }
+        
+        if (InputManager.Instance.CancelAction.triggered)
         {
             SetPlayerState(PlayerState.None);
         }

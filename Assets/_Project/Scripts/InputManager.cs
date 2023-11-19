@@ -8,12 +8,8 @@ public class InputManager : Singleton<InputManager>
     public InputAction MoveAction { private set; get; }
     public InputAction PlaceTower { private set; get; }
     public InputAction LookAction { private set; get; }
-
-    public InputAction Zoom
-    {
-        private set;
-        get;
-    }
+    public InputAction CancelAction { private set; get; }
+    public InputAction Zoom { private set; get; }
 
     protected override void Awake()
     {
@@ -31,5 +27,6 @@ public class InputManager : Singleton<InputManager>
         PlaceTower = playerInput.actions["PlaceTower"];
         LookAction = playerInput.actions["Look"];
         Zoom = playerInput.actions["Zoom"];
+        CancelAction = playerInput.actions["Cancel"];
     }
 }

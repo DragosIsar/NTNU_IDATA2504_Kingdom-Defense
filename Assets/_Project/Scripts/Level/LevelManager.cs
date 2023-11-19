@@ -116,7 +116,7 @@ public class LevelManager : Singleton<LevelManager>
             SetStatusText("Not enough space!");
             return false;
         }
-
+        
         Instantiate(tower, pos, Quaternion.identity);
         SpendCurrency(tower.settings.cost);
         return true;
@@ -135,11 +135,11 @@ public class LevelManager : Singleton<LevelManager>
     public void SetTowerToPlace(Tower tower)
     {
         _towerToPlace = tower;
-        GameManager.Instance.Player.SetPlayerState(PlayerState.TowerPlacement);
+        GameManager.Player.SetPlayerState(PlayerState.TowerPlacement);
     }
     
     public static void SetStatusText(string text, float duration = 2f)
     {
-        GameManager.Instance.HUD.SetStatusText(text, duration);
+        GameManager.HUD.SetStatusText(text, duration);
     }
 }

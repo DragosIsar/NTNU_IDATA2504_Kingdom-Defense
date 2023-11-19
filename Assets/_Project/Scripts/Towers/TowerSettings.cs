@@ -15,5 +15,6 @@ public class TowerSettings : ScriptableObject
     public int damageIncrease = 1;
 
     [Header("UI")]
+    public string towerName;
     public Sprite icon;
 }

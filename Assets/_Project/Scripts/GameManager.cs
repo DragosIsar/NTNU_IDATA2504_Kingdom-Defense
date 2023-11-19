@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,11 +11,26 @@ public class GameManager : Singleton<GameManager>
     
     public List<Tower> towers = new ();
 
-    public Player Player => _player ? _player : FindFirstObjectByType<Player>();
+    public static Player Player => Instance._player ? Instance._player : FindFirstObjectByType<Player>();
     private Player _player;
     
-    public HUD HUD => _hud ? _hud : FindFirstObjectByType<HUD>();
+    public static HUD HUD => Instance._hud ? Instance._hud : FindFirstObjectByType<HUD>();
     private HUD _hud;
+    
+    public static bool CursorAboveUI
+    {
+        get => IsInitialized && Instance._cursorAboveUI;
+        set
+        {
+            if (IsInitialized)
+            {
+                return;
+            }
+            Instance._cursorAboveUI = value;
+        }
+    }
+    
+    private bool _cursorAboveUI;
 
     public static class Keys
     {
@@ -51,7 +67,13 @@ public class GameManager : Singleton<GameManager>
         
         //LoadLevelData();
     }
-    
+
+    private void Update()
+    {
+        // check if the cursor is above the UI
+        CursorAboveUI = UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         
