@@ -43,6 +43,15 @@ public class SoundManager : Singleton<SoundManager>
     {
         sfxAudioSource.PlayOneShot(clip, volume);
     }
+
+    public AudioSource PlaySFXWithNewSource(AudioClip clip)
+    {
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.outputAudioMixerGroup = sfxGroup;
+        audioSource.clip = clip;
+        audioSource.Play();
+        return audioSource;
+    }
     
     public void PlayMusic(AudioClip clip)
     {

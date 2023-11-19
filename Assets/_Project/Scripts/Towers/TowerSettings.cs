@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TowerSettings", menuName = "ScriptableObjects/TowerSettings")]
 public class TowerSettings : ScriptableObject
 {
+    public bool isUnlocked = true;
+    
     [Header("Tower Settings")] public int cost = 10;
     public float range = 5f;
     public float attackRate = 1f;

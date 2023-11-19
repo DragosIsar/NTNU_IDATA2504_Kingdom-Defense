@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,24 +31,27 @@ public class HUD : MonoBehaviour
     
     private void CreateTowerPlacementToggles()
     {
-        GameManager.Instance.towers.ForEach(tower =>
-        {
-            Toggle toggle = Instantiate(towerPlacementTogglePrefab, towerPlacementPanel);
-            toggle.group = _toggleGroup;
-            toggle.isOn = false;
-            toggle.onValueChanged.AddListener(isOn =>
+        GameManager.Instance.towers
+            .Where(tower => tower.settings.isUnlocked)
+            .ToList()
+            .ForEach(tower =>
             {
-                if (isOn)
+                Toggle toggle = Instantiate(towerPlacementTogglePrefab, towerPlacementPanel);
+                toggle.group = _toggleGroup;
+                toggle.isOn = false;
+                toggle.onValueChanged.AddListener(isOn =>
                 {
-                    LevelManager.Instance.SetTowerToPlace(tower);
-                }
+                    if (isOn)
+                    {
+                        LevelManager.Instance.SetTowerToPlace(tower);
+                    }
+                });
+                TowerToggleUI towerToggleUi = toggle.GetComponent<TowerToggleUI>();
+                towerToggleUi.SetIcon(tower.settings.icon);
+                towerToggleUi.SetName(tower.settings.towerName);
+                towerToggleUi.SetCost(tower.settings.cost);
+                _towerPlacementToggles.Add(toggle);
             });
-            TowerToggleUI towerToggleUi = toggle.GetComponent<TowerToggleUI>();
-            towerToggleUi.SetIcon(tower.settings.icon);
-            towerToggleUi.SetName(tower.settings.towerName);
-            towerToggleUi.SetCost(tower.settings.cost);
-            _towerPlacementToggles.Add(toggle);
-        });
     }
     
     public void SwitchOffAllToggles()

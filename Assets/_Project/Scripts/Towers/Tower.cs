@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static GameManager.Tags;
-using static GameManager;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -14,8 +11,8 @@ public class Tower : MonoBehaviour
     private float _attackRate = 1f;
     private float _attackRateTimer;
     private float _range = 5f;
-    
-    private List<Enemy> _targets = new();
+
+    protected List<Enemy> _targets = new();
     
     private SphereCollider _sphereCollider; 
 
@@ -44,7 +41,7 @@ public class Tower : MonoBehaviour
             enemy.OnDeath += () =>
             {
                 _targets.Remove(enemy);
-                OrderListByHealth();
+                OrderList();
             };
         }
     }
@@ -60,15 +57,15 @@ public class Tower : MonoBehaviour
         }
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (_attackRateTimer > 0)
         {
             _attackRateTimer -= Time.deltaTime;
         }
-        else
+        else if (_targets.Count > 0)
         {
-            if (_targets.Count != 0) Attack(_targets[0]);
+            Attack(_targets[0]);
             _attackRateTimer = 1 / _attackRate;
         }
     }
@@ -78,9 +75,8 @@ public class Tower : MonoBehaviour
         if (settings.attackSound) SoundManager.Instance.PlaySFX(settings.attackSound, .5f);
     }
     
-    protected void OrderListByHealth()
+    protected void OrderList()
     {
-        _targets.Sort((enemy1, enemy2) => enemy1.GetHealth().CompareTo(enemy2.GetHealth()));
-        _targets.Reverse();
+        _targets.Sort((enemy1, enemy2) => enemy2.GetHealth().CompareTo(enemy1.GetHealth()));
     }
 }

@@ -19,14 +19,10 @@ public class Player : MonoBehaviour
 
     private float _maxZoom;
     private Camera _camera;
-    
-    private Tower _selectedTower;
-
 
     private void Awake()
     {
         _camera = Camera.main ? Camera.main : GetComponentInChildren<Camera>();
-        _selectedTower = GameManager.Instance.towers[0];
         _maxZoom = _camera.orthographicSize;
         hud ??= GetComponentInChildren<HUD>();
     }
@@ -53,7 +49,7 @@ public class Player : MonoBehaviour
         if (InputManager.Instance.PlaceTower.triggered)
         {
             if (GameManager.CursorAboveUI) return;
-            if (LevelManager.Instance.TryPlaceTower(_selectedTower, MousePositionOnGround()))
+            if (LevelManager.Instance.TryPlaceTower(MousePositionOnGround()))
             {
                 SetPlayerState(PlayerState.None);
             }
