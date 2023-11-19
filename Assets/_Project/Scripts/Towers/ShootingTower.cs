@@ -12,6 +12,7 @@ public class ShootingTower : Tower
 
     protected override void Attack(Enemy enemy)
     {
+        base.Attack(enemy);
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
         Projectile p = projectile.GetComponent<Projectile>();
         

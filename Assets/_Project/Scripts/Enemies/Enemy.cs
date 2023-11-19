@@ -12,6 +12,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private Animator animator;
     [SerializeField] private Transform hitPointTransform;
+    
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip hitSound;
 
     private int _currentHealth;
     private Rigidbody _rigidbody;
@@ -72,6 +75,7 @@ public class Enemy : MonoBehaviour
         }
             
         animator.SetTrigger(_GET_HIT);
+        if (hitSound) SoundManager.Instance.PlaySFX(hitSound);
     }
 
     public void InitPath (List<Transform> path)
@@ -81,6 +85,7 @@ public class Enemy : MonoBehaviour
     
     private void Die()
     {
+        if (deathSound) SoundManager.Instance.PlaySFX(deathSound);
         OnDeath?.Invoke();
         LevelManager.Instance.CollectCurrency(enemyType.reward);
         if (enemyType.deathEffect != null)

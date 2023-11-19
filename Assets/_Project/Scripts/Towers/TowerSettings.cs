@@ -17,4 +17,7 @@ public class TowerSettings : ScriptableObject
     [Header("UI")]
     public string towerName;
     public Sprite icon;
+    
+    [Header("Sounds")]
+    public AudioClip attackSound;
 }

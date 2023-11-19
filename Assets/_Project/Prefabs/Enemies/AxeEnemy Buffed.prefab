@@ -100,6 +100,8 @@ MonoBehaviour:
   enemyType: {fileID: 11400000, guid: 2ee906e753690d441ae01233095213b5, type: 2}
   animator: {fileID: 8111738755908835317}
   hitPointTransform: {fileID: 8111738755899062595}
+  deathSound: {fileID: 8300000, guid: bb277184fd8c1b44a8f6e658f5ef75c3, type: 3}
+  hitSound: {fileID: 8300000, guid: 3ce0b4ac4d5cd874e8b36aba8242a87c, type: 3}
 --- !u!1 &8111738755899352097
 GameObject:
   m_ObjectHideFlags: 0

@@ -75,7 +75,7 @@ public class Tower : MonoBehaviour
 
     protected virtual void Attack(Enemy enemy)
     {
-        
+        if (settings.attackSound) SoundManager.Instance.PlaySFX(settings.attackSound, .5f);
     }
     
     protected void OrderListByHealth()
