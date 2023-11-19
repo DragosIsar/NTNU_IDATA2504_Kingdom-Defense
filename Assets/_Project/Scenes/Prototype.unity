@@ -1440,7 +1440,8 @@ AudioSource:
   m_GameObject: {fileID: 534588654}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 249633490670501766, guid: 924ea1f2f7db0ad439a585ebe16b82b6,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1536,12 +1537,13 @@ AudioSource:
   m_GameObject: {fileID: 534588654}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  OutputAudioMixerGroup: {fileID: -4249584185322768220, guid: 924ea1f2f7db0ad439a585ebe16b82b6,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: fbad1e1fe09835b478f0ed7cc4afc747, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -6368,6 +6370,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 4586021535775414334, guid: 58dd576d871287943b595087432132eb,
         type: 3}
+      propertyPath: menuMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: fbad1e1fe09835b478f0ed7cc4afc747, type: 3}
+    - target: {fileID: 4586021535775414334, guid: 58dd576d871287943b595087432132eb,
+        type: 3}
       propertyPath: audioMixer
       value: 
       objectReference: {fileID: 24100000, guid: 924ea1f2f7db0ad439a585ebe16b82b6,
@@ -6388,6 +6395,16 @@ PrefabInstance:
       propertyPath: musicAudioSource
       value: 
       objectReference: {fileID: 534588658}
+    - target: {fileID: 4586021535775414334, guid: 58dd576d871287943b595087432132eb,
+        type: 3}
+      propertyPath: gameMusic.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586021535775414334, guid: 58dd576d871287943b595087432132eb,
+        type: 3}
+      propertyPath: gameMusic.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: fbad1e1fe09835b478f0ed7cc4afc747, type: 3}
     - target: {fileID: 7937413473146911070, guid: 58dd576d871287943b595087432132eb,
         type: 3}
       propertyPath: m_LocalPosition.x
