@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
     private int _targetIndex;
     private List<Transform> _pathPositions;
     
+    private static readonly int _GET_HIT = Animator.StringToHash("getHit");
+
     private void Start()
     {
         _currentHealth = enemyType.health;
@@ -68,6 +70,8 @@ public class Enemy : MonoBehaviour
         {
             _currentHealth -= damage;
         }
+            
+        animator.SetTrigger(_GET_HIT);
     }
 
     public void InitPath (List<Transform> path)
