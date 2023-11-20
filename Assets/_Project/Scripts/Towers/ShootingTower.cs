@@ -1,18 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static GameManager.Tags;
 
 public class ShootingTower : Tower
 {
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private Transform projectileSpawnPoint;
+    [SerializeField] protected GameObject projectilePrefab;
+    [SerializeField] protected Transform projectileSpawnPoint;
     
 
     protected override void Attack(Enemy enemy)
     {
         base.Attack(enemy);
+        
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
         Projectile p = projectile.GetComponent<Projectile>();
         

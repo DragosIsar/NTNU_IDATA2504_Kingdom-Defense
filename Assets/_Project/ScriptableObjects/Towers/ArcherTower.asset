@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUnlocked: 1
   cost: 10
-  range: 30
+  range: 20
   attackRate: 0.333
   damage: 10
   placeRadius: 5

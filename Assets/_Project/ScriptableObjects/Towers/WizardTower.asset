@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUnlocked: 1
   cost: 15
-  range: 50
+  range: 25
   attackRate: 5
   damage: 1
   placeRadius: 5
@@ -23,5 +23,5 @@ MonoBehaviour:
   attackRateIncrease: 0.1
   damageIncrease: 1
   towerName: Wizard
-  icon: {fileID: 21300000, guid: b61a36370cdcde14ea58363b27d1e9ce, type: 3}
+  icon: {fileID: 21300000, guid: 203ae284312f87b4e995ea82d1ae19e5, type: 3}
   attackSound: {fileID: 8300000, guid: 81b5426761306064ebcf138e4fd9a20d, type: 3}

@@ -10,14 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28cccb03be895ae439a547597d6ab1e9, type: 3}
-  m_Name: PrototypeTower2
+  m_Name: CannonTower
   m_EditorClassIdentifier: 
-  cost: 10
-  range: 5
-  fireRate: 1
-  damage: 1
-  placeRadius: 10
+  isUnlocked: 1
+  cost: 50
+  range: 50
+  attackRate: 0.1
+  damage: 50
+  placeRadius: 15
   upgradeCostIncrease: 5
   rangeIncrease: 1
-  fireRateIncrease: 0.1
+  attackRateIncrease: 0.1
   damageIncrease: 1
+  towerName: Canon
+  icon: {fileID: 21300000, guid: 9c0942da0b04bb3418530be1153d5982, type: 3}
+  attackSound: {fileID: 8300000, guid: 9dda0a3b92003624ba712864565dbe44, type: 3}
