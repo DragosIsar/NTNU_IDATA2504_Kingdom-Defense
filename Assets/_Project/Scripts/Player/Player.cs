@@ -42,6 +42,11 @@ public class Player : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+        
+        if (InputManager.Instance.CancelAction.triggered && playerState == PlayerState.None)
+        {
+            hud.TogglePauseMenu();
+        }
     }
 
     private void PlaceTowers()
@@ -114,5 +119,10 @@ public class Player : MonoBehaviour
     public void LoadMenu()
     {
         LevelManager.Instance.LoadMainMenu();
+    }
+    
+    public void LoadNextLevel()
+    {
+        LevelManager.Instance.LoadNextLevel();
     }
 }

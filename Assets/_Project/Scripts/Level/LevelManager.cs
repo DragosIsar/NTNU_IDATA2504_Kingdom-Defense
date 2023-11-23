@@ -17,7 +17,7 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private int baseHealth = 100;
 
     public int inLevelCurrency;
-    private float _levelScore;
+    private int _levelScore = -1;
 
     private List<Tower> _towers;
     private Tower _towerToPlace;
@@ -30,12 +30,18 @@ public class LevelManager : Singleton<LevelManager>
     private float _enemySpawnTimer;
     private int _enemyCount;
 
+    private float _currentLevelTime;
+    
+    private bool _gameEnded;
+
     protected override void Awake()
     {
         base.Awake();
+        useDontDestroyOnLoad = false;
         baseHealth = level.maxBaseHealth;
         inLevelCurrency = level.startingCurrency;
         enemySpawnInterval = level.spawnInterval;
+        _currentLevelTime = level.levelDurationInSec;
     }
 
     private void Update()
@@ -49,6 +55,15 @@ public class LevelManager : Singleton<LevelManager>
             SpawnEnemy();
             IncreaseSpawnInterval();    
             _enemySpawnTimer = enemySpawnInterval;
+        }
+        
+        if (_currentLevelTime > 0)
+        {
+            _currentLevelTime -= Time.deltaTime;
+        }
+        else
+        {
+            GameWin();
         }
     }
 
@@ -73,7 +88,7 @@ public class LevelManager : Singleton<LevelManager>
         if (baseHealth - damage <= 0)
         {
             baseHealth = 0;
-            EndLevel();
+            GameOver();
         }
         else
         {
@@ -94,17 +109,36 @@ public class LevelManager : Singleton<LevelManager>
         OnCurrencyChanged?.Invoke(inLevelCurrency);
     }
 
-    private void EndLevel()
+    private void GameOver()
     {
-        CalculateScore();
-        GameManager.Instance.PauseGame();
+        if (_gameEnded) return;
+        _gameEnded = true;
+        PauseGame();
         GameManager.Player.SetPlayerState(PlayerState.None);
         GameManager.HUD.ShowGameOverScreen();
     }
 
+    private void GameWin()
+    {
+        if (_gameEnded) return;
+        _gameEnded = true;
+        level.levelToUnlock.isUnlocked = true;
+        PauseGame();
+        GameManager.Player.SetPlayerState(PlayerState.None);
+        CalculateScore();
+        GrantCurrencyBasedOnScore();
+        GameManager.HUD.ShowGameWinScreen();
+    }
+
+    private void GrantCurrencyBasedOnScore()
+    {
+        int currency = _levelScore / 10;
+        GameManager.Instance.AddGlobalCurrency(currency);
+    }
+
     private void CalculateScore()
     {
-        _levelScore = (baseHealth / level.maxBaseHealth) * 100f;
+        _levelScore = baseHealth / level.maxBaseHealth * 100;
     }
 
     public bool TryPlaceTower(Vector3 pos)
@@ -160,5 +194,28 @@ public class LevelManager : Singleton<LevelManager>
     public float GetBaseMaxHealth()
     {
         return level.maxBaseHealth;
+    }
+    
+    public string GetCurrentLevelTimeFormatted()
+    {
+        return TimeSpan.FromSeconds(_currentLevelTime).ToString(@"mm\:ss");
+    }
+
+    public string GetLevelScore()
+    {
+        if (_levelScore == -1)
+        {
+            CalculateScore();
+        }
+        
+        return _levelScore.ToString("F0");
+    }
+
+    public void LoadNextLevel()
+    {
+        if (level.levelToUnlock != null)
+        {
+            LoadLevel(level.levelToUnlock);
+        }
     }
 }

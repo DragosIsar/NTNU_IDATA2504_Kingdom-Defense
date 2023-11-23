@@ -77,7 +77,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        
+        ResumeGame();
     }
 
     public static void LoadLevel(Level level)
@@ -171,8 +171,8 @@ public class GameManager : Singleton<GameManager>
         }
         PlayerPrefs.SetInt(GLOBAL_CURRENCY_KEY, amount);
     }
-    
-    private void AddGlobalCurrency(int amount)
+
+    public void AddGlobalCurrency(int amount)
     {
         if (amount < 0)
         {
@@ -214,13 +214,37 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void PauseGame()
+    public static void PauseGame()
     {
         Time.timeScale = 0f;
     }
     
-    public void ResumeGame()
+    public static void ResumeGame()
     {
         Time.timeScale = 1f;
+    }
+    
+    public static void TogglePauseGame()
+    {
+        if (Time.timeScale == 0f)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            PauseGame();
+        }
+    }
+
+    public static void SetPauseGame(bool mode)      
+    {
+        if (mode)
+        {
+            PauseGame();
+        }
+        else
+        {
+            ResumeGame();
+        }
     }
 }

@@ -14,11 +14,16 @@ public class HUD : MonoBehaviour
     [SerializeField] private TMP_Text statusText;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject winPanel;
+    [SerializeField] private TMP_Text globalCurrencyText;
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private GameObject pauseMenu;
     
     private List<Toggle> _towerPlacementToggles = new();
     private ToggleGroup _toggleGroup;
     
     private Coroutine _statusTextCoroutine;
+    
+    private bool _showTime = true;
     
     private void Awake()
     {
@@ -27,8 +32,12 @@ public class HUD : MonoBehaviour
     
     private void Start()
     {
-        statusText.text = "";
         CreateTowerPlacementToggles();
+    }
+
+    private void Update()
+    {
+        if (_showTime) statusText.text = LevelManager.Instance.GetCurrentLevelTimeFormatted();
     }
     
     private void CreateTowerPlacementToggles()
@@ -73,9 +82,10 @@ public class HUD : MonoBehaviour
     
     private IEnumerator SetStatusTextCoroutine(string text, float duration)
     {
+        _showTime = false;
         statusText.text = text;
         yield return new WaitForSeconds(duration);
-        statusText.text = "";
+        _showTime = true;
     }
     
     public void ShowGameOverScreen()
@@ -83,8 +93,16 @@ public class HUD : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
     
-    public void SetWinPanel(bool value)
+    public void ShowGameWinScreen()
     {
-        winPanel.SetActive(value);
+        scoreText.text = $"Score: {LevelManager.Instance.GetLevelScore()}";
+        globalCurrencyText.text = $"Total Global Currency: {GameManager.GlobalCurrency}";
+        winPanel.SetActive(true);
+    }
+
+    public void TogglePauseMenu()
+    {
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
+        GameManager.SetPauseGame(pauseMenu.activeSelf);
     }
 }
