@@ -97,6 +97,9 @@ public class LevelManager : Singleton<LevelManager>
     private void EndLevel()
     {
         CalculateScore();
+        GameManager.Instance.PauseGame();
+        GameManager.Player.SetPlayerState(PlayerState.None);
+        GameManager.HUD.ShowGameOverScreen();
     }
 
     private void CalculateScore()
@@ -142,5 +145,20 @@ public class LevelManager : Singleton<LevelManager>
     public static void SetStatusText(string text, float duration = 2f)
     {
         GameManager.HUD.SetStatusText(text, duration);
+    }
+
+    public void ReloadLevel()
+    {
+        LoadLevel(level);
+    }
+
+    public void LoadMainMenu()
+    {
+        GameManager.LoadMainMenu();
+    }
+
+    public float GetBaseMaxHealth()
+    {
+        return level.maxBaseHealth;
     }
 }

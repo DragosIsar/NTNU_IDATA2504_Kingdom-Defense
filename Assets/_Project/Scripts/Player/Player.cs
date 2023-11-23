@@ -105,4 +105,14 @@ public class Player : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);
         }
     }
+
+    public void ReloadLevel()
+    {
+        LevelManager.Instance.ReloadLevel();
+    }
+
+    public void LoadMenu()
+    {
+        LevelManager.Instance.LoadMainMenu();
+    }
 }

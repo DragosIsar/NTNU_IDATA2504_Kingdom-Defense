@@ -12,6 +12,8 @@ public class HUD : MonoBehaviour
     [SerializeField] private Toggle towerPlacementTogglePrefab;
     [SerializeField] private RectTransform towerPlacementPanel;
     [SerializeField] private TMP_Text statusText;
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject winPanel;
     
     private List<Toggle> _towerPlacementToggles = new();
     private ToggleGroup _toggleGroup;
@@ -74,5 +76,15 @@ public class HUD : MonoBehaviour
         statusText.text = text;
         yield return new WaitForSeconds(duration);
         statusText.text = "";
+    }
+    
+    public void ShowGameOverScreen()
+    {
+        gameOverPanel.SetActive(true);
+    }
+    
+    public void SetWinPanel(bool value)
+    {
+        winPanel.SetActive(value);
     }
 }

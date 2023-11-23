@@ -25,6 +25,6 @@ public class HealthbarDisplay : MonoBehaviour
 
     private void OnHealthChangedHandler(int health)
     {
-        _slider.value = health / 100f;
+        _slider.value = health / (float) LevelManager.Instance.GetBaseMaxHealth();
     }
 }
