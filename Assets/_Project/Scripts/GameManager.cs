@@ -68,6 +68,7 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         useDontDestroyOnLoad = true;
         
+        LoadTowerData();
         //LoadLevelData();
     }
 
@@ -103,7 +104,30 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(levels[sceneIndex].sceneAssetName);
     }
     
-    private void SafeLevelData ()
+    public void SaveTowerData ()
+    {
+        foreach (Tower tower in towers)
+        {
+            PlayerPrefs.SetInt(tower.settings.towerName, tower.settings.isUnlocked ? 1 : 0);
+        }
+    }
+    
+    public void LoadTowerData ()
+    {
+        foreach (Tower tower in towers)
+        {
+            if (PlayerPrefs.HasKey(tower.settings.towerName))
+            {
+                tower.settings.isUnlocked = PlayerPrefs.GetInt(tower.settings.towerName) == 1;
+            }
+            else
+            {
+                tower.settings.isUnlocked = false;
+            }
+        }
+    }
+    
+    private void SaveLevelData ()
     {
         foreach (Level level in levels)
         {
@@ -207,13 +231,13 @@ public class GameManager : Singleton<GameManager>
     public void UnlockLevel(Level level)
     {
         level.isUnlocked = true;
-        SafeLevelData();
+        SaveLevelData();
     }
     
     public void CompleteLevel(Level level)
     {
         level.isCompleted = true;
-        SafeLevelData();
+        SaveLevelData();
     }
 
     public void Quit()
@@ -268,6 +292,8 @@ public class GameManager : Singleton<GameManager>
         
         RemoveGlobalCurrency(tower.settings.unlockCost);
         tower.settings.isUnlocked = true;
+        
+        SaveTowerData();
         
         return true;
     }

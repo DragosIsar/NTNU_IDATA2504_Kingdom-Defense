@@ -40,7 +40,6 @@ public class MainMenu : MonoBehaviour
             levelButtonText.text = level.name;
             
             levelButtonComponent.interactable = level.isUnlocked;
-            
         }
     }
 
