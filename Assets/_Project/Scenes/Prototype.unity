@@ -950,7 +950,7 @@ PrefabInstance:
     - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
         type: 3}
       propertyPath: proTowerPlacementLayerMask.m_Bits
-      value: 128
+      value: 641
       objectReference: {fileID: 0}
     - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
         type: 3}
@@ -3296,7 +3296,7 @@ GameObject:
   - component: {fileID: 1006268088}
   m_Layer: 7
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

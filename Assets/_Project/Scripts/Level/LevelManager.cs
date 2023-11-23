@@ -149,7 +149,8 @@ public class LevelManager : Singleton<LevelManager>
             return false;
         }
 
-        if (IsTowerLocationValid(pos, _towerToPlace))
+        if (IsTowerLocationValid(pos, _towerToPlace) ||
+            pos == Vector3.zero)
         {
             SetStatusText("Not enough space!");
             return false;

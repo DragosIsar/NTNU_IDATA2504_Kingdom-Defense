@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
     private Vector3 MousePositionOnGround()
     {
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LevelManager.Instance.proTowerPlacementLayerMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LevelManager.Instance.proTowerPlacementLayerMask) && hit.collider.CompareTag(GROUND))
         {
             return hit.point;
         }
