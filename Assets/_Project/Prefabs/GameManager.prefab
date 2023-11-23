@@ -44,3 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8657970cc84de249bb9b08dd1e56a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levels:
+  - {fileID: 11400000, guid: 4e24884518c573a468ded2abc896f5f4, type: 2}
+  - {fileID: 11400000, guid: 1751033f5599f094dbcb2150653d8416, type: 2}
+  towers:
+  - {fileID: 6907952090718696147, guid: 2b566ac8bdb55c04f94022bc0daa57a7, type: 3}
+  - {fileID: -6577931257846727917, guid: b515ce739fa0fa34a9cf37615e34af23, type: 3}
+  - {fileID: 2246789994369214929, guid: 815ef463cddfdd64f84d6acb39ab1ba1, type: 3}

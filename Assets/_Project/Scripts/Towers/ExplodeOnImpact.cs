@@ -25,7 +25,7 @@ public class ExplodeOnImpact : MonoBehaviour
         {
             VisualEffect vfx = Instantiate(explosionVFX, transform.position, Quaternion.identity);
             vfx.Play();
-            Destroy(vfx, 5f);
+            Destroy(vfx, vfxDuration);
         }
         
         if (explosionSound) SoundManager.Instance.PlaySFX(explosionSound, 0.5f);

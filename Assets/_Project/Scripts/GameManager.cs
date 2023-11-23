@@ -50,6 +50,8 @@ public class GameManager : Singleton<GameManager>
         get => GetGlobalCurrency();
         set => SetGlobalCurrency(value);
     }
+    
+    public static event Action<int> OnGlobalCurrencyChanged;
 
     public void OnEnable()
     {
@@ -169,18 +171,28 @@ public class GameManager : Singleton<GameManager>
             Debug.LogError("Cannot set negative currency");
             return;
         }
+        OnGlobalCurrencyChanged?.Invoke(amount);
         PlayerPrefs.SetInt(GLOBAL_CURRENCY_KEY, amount);
     }
 
-    public void AddGlobalCurrency(int amount)
+    public static void AddGlobalCurrency(int amount)
     {
         if (amount < 0)
         {
             Debug.LogError("Cannot add negative currency");
             return;
         }
-        int currentCurrency = GetGlobalCurrency();
-        PlayerPrefs.SetInt(GLOBAL_CURRENCY_KEY, currentCurrency + amount);
+        SetGlobalCurrency(GlobalCurrency + amount);
+    }
+    
+    public static void RemoveGlobalCurrency(int amount)
+    {
+        if (amount < 0)
+        {
+            Debug.LogError("Cannot remove negative currency");
+            return;
+        }
+        SetGlobalCurrency(GlobalCurrency - amount);
     }
     
     public void PlayNextUnlockedLevel()
@@ -246,5 +258,17 @@ public class GameManager : Singleton<GameManager>
         {
             ResumeGame();
         }
+    }
+
+    public bool UnlockTower(Tower tower)
+    {
+        if (!towers.Contains(tower)) return false;
+        
+        if (GlobalCurrency < tower.settings.unlockCost) return false;
+        
+        RemoveGlobalCurrency(tower.settings.unlockCost);
+        tower.settings.isUnlocked = true;
+        
+        return true;
     }
 }

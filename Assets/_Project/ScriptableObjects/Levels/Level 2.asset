@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneAssetName: Prototype
   sceneIndexInBuildSettings: 1
+  levelDurationInSec: 300
   maxBaseHealth: 100
   startingCurrency: 10
   enemyPrefabs:
@@ -24,6 +25,6 @@ MonoBehaviour:
   - {fileID: 1663432052407533762, guid: 0e239f7153af0cd4c9570dcef778a5bf, type: 3}
   spawnInterval: 1
   spawnIntervalMultiplier: 0.9
-  isUnlocked: 1
+  isUnlocked: 0
   isCompleted: 0
   levelToUnlock: {fileID: 11400000}

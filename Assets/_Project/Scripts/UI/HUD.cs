@@ -60,7 +60,7 @@ public class HUD : MonoBehaviour
                 TowerToggleUI towerToggleUi = toggle.GetComponent<TowerToggleUI>();
                 towerToggleUi.SetIcon(tower.settings.icon);
                 towerToggleUi.SetName(tower.settings.towerName);
-                towerToggleUi.SetCost(tower.settings.cost);
+                towerToggleUi.SetCost(tower.settings.placementCost);
                 _towerPlacementToggles.Add(toggle);
             });
     }

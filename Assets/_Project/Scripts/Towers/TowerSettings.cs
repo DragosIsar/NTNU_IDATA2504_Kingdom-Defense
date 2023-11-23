@@ -5,7 +5,9 @@ public class TowerSettings : ScriptableObject
 {
     public bool isUnlocked = true;
     
-    [Header("Tower Settings")] public int cost = 10;
+    [Header("Tower Settings")] 
+    public int unlockCost = 10;
+    public int placementCost = 10;
     public float range = 5f;
     public float attackRate = 1f;
     public int damage = 1;

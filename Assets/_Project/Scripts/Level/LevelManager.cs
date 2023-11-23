@@ -133,7 +133,7 @@ public class LevelManager : Singleton<LevelManager>
     private void GrantCurrencyBasedOnScore()
     {
         int currency = _levelScore / 10;
-        GameManager.Instance.AddGlobalCurrency(currency);
+        AddGlobalCurrency(currency);
     }
 
     private void CalculateScore()
@@ -143,7 +143,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public bool TryPlaceTower(Vector3 pos)
     {
-        if (inLevelCurrency < _towerToPlace.settings.cost)
+        if (inLevelCurrency < _towerToPlace.settings.placementCost)
         {
             SetStatusText("Not enough currency!");
             return false;
@@ -157,7 +157,7 @@ public class LevelManager : Singleton<LevelManager>
         }
         
         Instantiate(_towerToPlace, pos, Quaternion.identity);
-        SpendCurrency(_towerToPlace.settings.cost);
+        SpendCurrency(_towerToPlace.settings.placementCost);
         return true;
     }
 
