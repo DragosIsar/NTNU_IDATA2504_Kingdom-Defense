@@ -12,8 +12,9 @@ public class LevelManager : Singleton<LevelManager>
     public Action<int> onHealthChanged;
     
     [SerializeField] private Level level;
-    [SerializeField] private List<Transform> pathPos;
-    
+    [SerializeField] private List<Transform> path1;
+    [SerializeField] private List<Transform> path2;
+
     [SerializeField] private int baseHealth = 100;
 
     public int inLevelCurrency;
@@ -29,6 +30,7 @@ public class LevelManager : Singleton<LevelManager>
     public float enemySpawnInterval = 1f;
     private float _enemySpawnTimer;
     private int _enemyCount;
+
 
     protected override void Awake()
     {
@@ -55,7 +57,17 @@ public class LevelManager : Singleton<LevelManager>
     private void SpawnEnemy()
     {
         Enemy enemy = Instantiate(level.enemyPrefabs[Random.Range(0, level.enemyPrefabs.Length)], enemySpawnPoint.position, Quaternion.identity);
-        enemy.InitPath(pathPos);
+        
+        if(Random.Range(0,2) < 1)
+        {
+            enemy.InitPath(path2);
+            //Debug.Log("Path 2");
+        }
+        else
+        {
+            enemy.InitPath(path1);
+            //Debug.Log("Path 1");
+        }
         
         _enemyCount++;
     }
