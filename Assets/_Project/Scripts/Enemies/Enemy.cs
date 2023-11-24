@@ -59,8 +59,7 @@ public class Enemy : MonoBehaviour
 
     private void SwitchToNextTarget ()
     {
-        if (_targetIndex < _pathPositions.Count-1) _targetIndex++;
-        Debug.Log(_targetIndex);
+        if (_targetIndex < _pathPositions.Count - 1) _targetIndex++;
     }
     
     public void Damage(int damage)

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUnlocked: 0
   unlockCost: 10
-  placementCost: 10
+  placementCost: 0
   range: 50
   attackRate: 0.1
   damage: 50
-  placeRadius: 15
+  placeRadius: 5
   upgradeCostIncrease: 5
   rangeIncrease: 1
   attackRateIncrease: 0.1

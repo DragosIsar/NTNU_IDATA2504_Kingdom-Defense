@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: ArcherTower
   m_EditorClassIdentifier: 
   isUnlocked: 1
+  alwaysUnlocked: 1
   unlockCost: 0
   placementCost: 10
   range: 20
   attackRate: 0.333
   damage: 10
-  placeRadius: 5
+  placeRadius: 1
   upgradeCostIncrease: 5
   rangeIncrease: 1
   attackRateIncrease: 0.1

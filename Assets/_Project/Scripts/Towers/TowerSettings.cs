@@ -4,6 +4,7 @@ using UnityEngine;
 public class TowerSettings : ScriptableObject
 {
     public bool isUnlocked = true;
+    public bool alwaysUnlocked = false;
     
     [Header("Tower Settings")] 
     public int unlockCost = 10;
@@ -24,4 +25,18 @@ public class TowerSettings : ScriptableObject
     
     [Header("Sounds")]
     public AudioClip attackSound;
+    
+    [ContextMenu("Unlock Tower and Save")]
+    public void UnlockTowerAndSave()
+    {
+        isUnlocked = true;
+        GameManager.UnlockTower(this);
+    }
+    
+    [ContextMenu("Lock Tower and Save")]
+    public void LockTowerAndSave()
+    {
+        isUnlocked = false;
+        GameManager.LockTower(this);
+    }
 }

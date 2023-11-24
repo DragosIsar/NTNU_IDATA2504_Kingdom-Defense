@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5480604d57f645a4caa88dae5124c187, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  sceneAssetName: Prototype
-  sceneIndexInBuildSettings: 1
+  sceneAssetName: Level 1
+  sceneIndexInBuildSettings: 2
   levelDurationInSec: 300
   maxBaseHealth: 100
   startingCurrency: 10
