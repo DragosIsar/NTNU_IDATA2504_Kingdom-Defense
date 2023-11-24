@@ -2575,7 +2575,7 @@ PrefabInstance:
     - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
         type: 3}
       propertyPath: antiTowerPlacementLayerMask.m_Bits
-      value: 609
+      value: 608
       objectReference: {fileID: 0}
     - target: {fileID: 3869647472495650051, guid: e1af3560f909b80419676ffdabdb41fc,
         type: 3}

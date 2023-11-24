@@ -19,7 +19,7 @@ MonoBehaviour:
   range: 20
   attackRate: 0.333
   damage: 10
-  placeRadius: 1
+  placeRadius: 5
   upgradeCostIncrease: 5
   rangeIncrease: 1
   attackRateIncrease: 0.1

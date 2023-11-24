@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cccb03be895ae439a547597d6ab1e9, type: 3}
   m_Name: CannonTower
   m_EditorClassIdentifier: 
-  isUnlocked: 0
+  isUnlocked: 1
+  alwaysUnlocked: 0
   unlockCost: 10
   placementCost: 0
   range: 50
