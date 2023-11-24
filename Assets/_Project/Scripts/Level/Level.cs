@@ -9,6 +9,7 @@ public class Level : ScriptableObject
     public int sceneIndexInBuildSettings;
     
     [Header("Level Settings")]
+    public float levelDurationInSec = 300f;
     public int maxBaseHealth = 100;
     public int startingCurrency = 100;
     public Enemy[] enemyPrefabs;

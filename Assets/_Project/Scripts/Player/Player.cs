@@ -42,6 +42,11 @@ public class Player : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+        
+        if (InputManager.Instance.CancelAction.triggered && playerState == PlayerState.None)
+        {
+            hud.TogglePauseMenu();
+        }
     }
 
     private void PlaceTowers()
@@ -64,7 +69,7 @@ public class Player : MonoBehaviour
     private Vector3 MousePositionOnGround()
     {
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LevelManager.Instance.proTowerPlacementLayerMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LevelManager.Instance.proTowerPlacementLayerMask) && hit.collider.CompareTag(GROUND))
         {
             return hit.point;
         }
@@ -104,5 +109,20 @@ public class Player : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);
         }
+    }
+
+    public void ReloadLevel()
+    {
+        LevelManager.Instance.ReloadLevel();
+    }
+
+    public void LoadMenu()
+    {
+        LevelManager.Instance.LoadMainMenu();
+    }
+    
+    public void LoadNextLevel()
+    {
+        LevelManager.Instance.LoadNextLevel();
     }
 }

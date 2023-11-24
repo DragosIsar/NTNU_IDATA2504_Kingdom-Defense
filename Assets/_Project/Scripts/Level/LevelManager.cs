@@ -18,7 +18,7 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private int baseHealth = 100;
 
     public int inLevelCurrency;
-    private float _levelScore;
+    private int _levelScore = -1;
 
     private List<Tower> _towers;
     private Tower _towerToPlace;
@@ -31,13 +31,18 @@ public class LevelManager : Singleton<LevelManager>
     private float _enemySpawnTimer;
     private int _enemyCount;
 
+    private float _currentLevelTime;
+    
+    private bool _gameEnded;
 
     protected override void Awake()
     {
         base.Awake();
+        useDontDestroyOnLoad = false;
         baseHealth = level.maxBaseHealth;
         inLevelCurrency = level.startingCurrency;
         enemySpawnInterval = level.spawnInterval;
+        _currentLevelTime = level.levelDurationInSec;
     }
 
     private void Update()
@@ -51,6 +56,15 @@ public class LevelManager : Singleton<LevelManager>
             SpawnEnemy();
             IncreaseSpawnInterval();    
             _enemySpawnTimer = enemySpawnInterval;
+        }
+        
+        if (_currentLevelTime > 0)
+        {
+            _currentLevelTime -= Time.deltaTime;
+        }
+        else
+        {
+            GameWin();
         }
     }
 
@@ -85,7 +99,7 @@ public class LevelManager : Singleton<LevelManager>
         if (baseHealth - damage <= 0)
         {
             baseHealth = 0;
-            EndLevel();
+            GameOver();
         }
         else
         {
@@ -106,32 +120,55 @@ public class LevelManager : Singleton<LevelManager>
         OnCurrencyChanged?.Invoke(inLevelCurrency);
     }
 
-    private void EndLevel()
+    private void GameOver()
     {
+        if (_gameEnded) return;
+        _gameEnded = true;
+        PauseGame();
+        GameManager.Player.SetPlayerState(PlayerState.None);
+        GameManager.HUD.ShowGameOverScreen();
+    }
+
+    private void GameWin()
+    {
+        if (_gameEnded) return;
+        _gameEnded = true;
+        level.levelToUnlock.isUnlocked = true;
+        PauseGame();
+        GameManager.Player.SetPlayerState(PlayerState.None);
         CalculateScore();
+        GrantCurrencyBasedOnScore();
+        GameManager.HUD.ShowGameWinScreen();
+    }
+
+    private void GrantCurrencyBasedOnScore()
+    {
+        int currency = _levelScore / 10;
+        AddGlobalCurrency(currency);
     }
 
     private void CalculateScore()
     {
-        _levelScore = (baseHealth / level.maxBaseHealth) * 100f;
+        _levelScore = baseHealth / level.maxBaseHealth * 100;
     }
 
     public bool TryPlaceTower(Vector3 pos)
     {
-        if (inLevelCurrency < _towerToPlace.settings.cost)
+        if (inLevelCurrency < _towerToPlace.settings.placementCost)
         {
             SetStatusText("Not enough currency!");
             return false;
         }
 
-        if (IsTowerLocationValid(pos, _towerToPlace))
+        if (IsTowerLocationValid(pos, _towerToPlace) ||
+            pos == Vector3.zero)
         {
             SetStatusText("Not enough space!");
             return false;
         }
         
         Instantiate(_towerToPlace, pos, Quaternion.identity);
-        SpendCurrency(_towerToPlace.settings.cost);
+        SpendCurrency(_towerToPlace.settings.placementCost);
         return true;
     }
 
@@ -154,5 +191,43 @@ public class LevelManager : Singleton<LevelManager>
     public static void SetStatusText(string text, float duration = 2f)
     {
         GameManager.HUD.SetStatusText(text, duration);
+    }
+
+    public void ReloadLevel()
+    {
+        LoadLevel(level);
+    }
+
+    public void LoadMainMenu()
+    {
+        GameManager.LoadMainMenu();
+    }
+
+    public float GetBaseMaxHealth()
+    {
+        return level.maxBaseHealth;
+    }
+    
+    public string GetCurrentLevelTimeFormatted()
+    {
+        return TimeSpan.FromSeconds(_currentLevelTime).ToString(@"mm\:ss");
+    }
+
+    public string GetLevelScore()
+    {
+        if (_levelScore == -1)
+        {
+            CalculateScore();
+        }
+        
+        return _levelScore.ToString("F0");
+    }
+
+    public void LoadNextLevel()
+    {
+        if (level.levelToUnlock != null)
+        {
+            LoadLevel(level.levelToUnlock);
+        }
     }
 }

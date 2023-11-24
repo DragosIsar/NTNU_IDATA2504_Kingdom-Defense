@@ -50,6 +50,8 @@ public class GameManager : Singleton<GameManager>
         get => GetGlobalCurrency();
         set => SetGlobalCurrency(value);
     }
+    
+    public static event Action<int> OnGlobalCurrencyChanged;
 
     public void OnEnable()
     {
@@ -66,6 +68,7 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         useDontDestroyOnLoad = true;
         
+        LoadTowerData();
         //LoadLevelData();
     }
 
@@ -77,7 +80,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        
+        ResumeGame();
     }
 
     public static void LoadLevel(Level level)
@@ -101,7 +104,30 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(levels[sceneIndex].sceneAssetName);
     }
     
-    private void SafeLevelData ()
+    public void SaveTowerData ()
+    {
+        foreach (Tower tower in towers)
+        {
+            PlayerPrefs.SetInt(tower.settings.towerName, tower.settings.isUnlocked ? 1 : 0);
+        }
+    }
+    
+    public void LoadTowerData ()
+    {
+        foreach (Tower tower in towers)
+        {
+            if (PlayerPrefs.HasKey(tower.settings.towerName))
+            {
+                tower.settings.isUnlocked = PlayerPrefs.GetInt(tower.settings.towerName) == 1;
+            }
+            else
+            {
+                tower.settings.isUnlocked = false;
+            }
+        }
+    }
+    
+    private void SaveLevelData ()
     {
         foreach (Level level in levels)
         {
@@ -169,18 +195,28 @@ public class GameManager : Singleton<GameManager>
             Debug.LogError("Cannot set negative currency");
             return;
         }
+        OnGlobalCurrencyChanged?.Invoke(amount);
         PlayerPrefs.SetInt(GLOBAL_CURRENCY_KEY, amount);
     }
-    
-    private void AddGlobalCurrency(int amount)
+
+    public static void AddGlobalCurrency(int amount)
     {
         if (amount < 0)
         {
             Debug.LogError("Cannot add negative currency");
             return;
         }
-        int currentCurrency = GetGlobalCurrency();
-        PlayerPrefs.SetInt(GLOBAL_CURRENCY_KEY, currentCurrency + amount);
+        SetGlobalCurrency(GlobalCurrency + amount);
+    }
+    
+    public static void RemoveGlobalCurrency(int amount)
+    {
+        if (amount < 0)
+        {
+            Debug.LogError("Cannot remove negative currency");
+            return;
+        }
+        SetGlobalCurrency(GlobalCurrency - amount);
     }
     
     public void PlayNextUnlockedLevel()
@@ -195,17 +231,70 @@ public class GameManager : Singleton<GameManager>
     public void UnlockLevel(Level level)
     {
         level.isUnlocked = true;
-        SafeLevelData();
+        SaveLevelData();
     }
     
     public void CompleteLevel(Level level)
     {
         level.isCompleted = true;
-        SafeLevelData();
+        SaveLevelData();
     }
 
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public static void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public static void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+    
+    public static void ResumeGame()
+    {
+        Time.timeScale = 1f;
+    }
+    
+    public static void TogglePauseGame()
+    {
+        if (Time.timeScale == 0f)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            PauseGame();
+        }
+    }
+
+    public static void SetPauseGame(bool mode)      
+    {
+        if (mode)
+        {
+            PauseGame();
+        }
+        else
+        {
+            ResumeGame();
+        }
+    }
+
+    public bool UnlockTower(Tower tower)
+    {
+        if (!towers.Contains(tower)) return false;
+        
+        if (GlobalCurrency < tower.settings.unlockCost) return false;
+        
+        RemoveGlobalCurrency(tower.settings.unlockCost);
+        tower.settings.isUnlocked = true;
+        
+        SaveTowerData();
+        
+        return true;
     }
 }
