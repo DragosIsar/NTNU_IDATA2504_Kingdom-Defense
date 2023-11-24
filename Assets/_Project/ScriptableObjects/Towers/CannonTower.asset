@@ -16,7 +16,7 @@ MonoBehaviour:
   alwaysUnlocked: 0
   unlockCost: 10
   placementCost: 0
-  range: 50
+  range: 30
   attackRate: 0.1
   damage: 50
   placeRadius: 5
