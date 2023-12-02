@@ -269,4 +269,22 @@ public class LevelManager : Singleton<LevelManager>
             LoadLevel(level.levelToUnlock);
         }
     }
+
+    public static bool TrySelectTower(Vector3 pos, out Tower tower)
+    {
+        tower = null;
+        Collider[] hits = Physics.OverlapSphere(pos, 5f);
+        
+        foreach (Collider hit in hits)
+        {
+            print(hit.name);
+            if (hit.TryGetComponent(out tower))
+            {
+                tower = tower;
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

@@ -32,6 +32,12 @@ public class BeamTower : Tower
         enemy.Damage(settings.damage);
     }
     
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        beamOrigin = upgrades[towerTier - 1].transform.Find("SpawningPos");
+    }
+    
     private void PlayAttackSound()
     {
         if (_hasStartedAttackSound) return;

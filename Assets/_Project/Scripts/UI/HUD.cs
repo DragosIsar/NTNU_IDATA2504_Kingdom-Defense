@@ -17,6 +17,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private TMP_Text globalCurrencyText;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private TowerDetails towerDetails;
     
     private List<Toggle> _towerPlacementToggles = new();
     private ToggleGroup _toggleGroup;
@@ -55,6 +56,10 @@ public class HUD : MonoBehaviour
                     if (isOn)
                     {
                         LevelManager.Instance.SetTowerToPlace(tower);
+                    }
+                    else
+                    {
+                        LevelManager.Instance.HideGhostTower();
                     }
                 });
                 TowerToggleUI towerToggleUi = toggle.GetComponent<TowerToggleUI>();
@@ -104,5 +109,10 @@ public class HUD : MonoBehaviour
     {
         pauseMenu.SetActive(!pauseMenu.activeSelf);
         GameManager.SetPauseGame(pauseMenu.activeSelf);
+    }
+
+    public void ShowTowerDetails(Tower tower)
+    {
+        towerDetails.SetTower(tower);
     }
 }

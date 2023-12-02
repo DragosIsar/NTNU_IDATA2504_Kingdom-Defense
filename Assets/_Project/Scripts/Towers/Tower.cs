@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static GameManager.Tags;
 
@@ -8,6 +9,11 @@ public class Tower : MonoBehaviour
 {
     public TowerSettings settings;
     
+    public int towerTier = 1;
+    public List<GameObject> upgrades = new();
+    public TMP_Text tierText;
+
+    private float _damage = 1;
     private float _attackRate = 1f;
     private float _attackRateTimer;
     private float _range = 5f;
@@ -87,6 +93,22 @@ public class Tower : MonoBehaviour
         if (meshRenderer == null) return;
         if (_originalMaterial == null) _originalMaterial = meshRenderer.material;
         meshRenderer.material = placeable ? settings.validGhostMaterial : settings.invalidGhostMaterial;
+    }
+
+    public virtual void Upgrade()
+    {
+        if (towerTier >= settings.maxTier) return;
+        towerTier++;
+        _damage = settings.damage + settings.damageIncrease;
+        _attackRate = settings.attackRate + settings.attackRateIncrease;
+        _range = settings.range + settings.rangeIncrease;
+        _sphereCollider.radius = _range;
+        
+        foreach (GameObject o in upgrades)
+        {
+            o.SetActive(false);
+        }
+        upgrades[towerTier - 1].SetActive(true);
     }
 
     public override bool Equals(object other)

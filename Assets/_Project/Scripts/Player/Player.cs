@@ -7,6 +7,7 @@ public enum PlayerState
 {
     None,
     TowerPlacement,
+    TowerDetails
 }
 
 public class Player : MonoBehaviour
@@ -38,17 +39,42 @@ public class Player : MonoBehaviour
         switch (playerState)
         {
             case PlayerState.None:
+                SelectTower();
                 break;
             case PlayerState.TowerPlacement:
                 PlaceTowers();
+                break;
+            case PlayerState.TowerDetails:
+                ShowTowerDetails();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
         
-        if (InputManager.Instance.CancelAction.triggered && playerState == PlayerState.None)
+        if (InputManager.Instance.PauseAction.triggered && playerState == PlayerState.None)
         {
             hud.TogglePauseMenu();
+        }
+    }
+    
+    private void SelectTower()
+    {
+        if (InputManager.Instance.PlaceTower.triggered)
+        {
+            if (GameManager.CursorAboveUI) return;
+            if (LevelManager.TrySelectTower(MousePositionOnGround(), out Tower tower))
+            {
+                SetPlayerState(PlayerState.TowerDetails);
+                hud.ShowTowerDetails(tower);
+            }
+        }
+    }
+    
+    private void ShowTowerDetails()
+    {
+        if (InputManager.Instance.CancelAction.triggered)
+        {
+            SetPlayerState(PlayerState.None);
         }
     }
 
@@ -117,6 +143,8 @@ public class Player : MonoBehaviour
                 hud.SwitchOffAllToggles();
                 break;
             case PlayerState.TowerPlacement:
+                break;
+            case PlayerState.TowerDetails:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(state), state, null);

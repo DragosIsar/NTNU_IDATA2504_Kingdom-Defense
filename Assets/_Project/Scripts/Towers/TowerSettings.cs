@@ -13,6 +13,7 @@ public class TowerSettings : ScriptableObject
     public float attackRate = 1f;
     public int damage = 1;
     public float placeRadius = 1f;
+    public float maxTier = 3f;
 
     [Header("Upgrades")] 
     public int upgradeCostIncrease = 5;
