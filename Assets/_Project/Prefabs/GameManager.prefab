@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2992971376449997785}
   - component: {fileID: 3366013538207266096}
+  - component: {fileID: 6239544761037070766}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,6 +49,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4e24884518c573a468ded2abc896f5f4, type: 2}
   - {fileID: 11400000, guid: 1751033f5599f094dbcb2150653d8416, type: 2}
   towers:
-  - {fileID: 6907952090718696147, guid: 2b566ac8bdb55c04f94022bc0daa57a7, type: 3}
-  - {fileID: -6577931257846727917, guid: b515ce739fa0fa34a9cf37615e34af23, type: 3}
-  - {fileID: 2246789994369214929, guid: 815ef463cddfdd64f84d6acb39ab1ba1, type: 3}
+  - {fileID: 6907952090718696147, guid: c4e24f84fd3b12845a8d2242b4cb9c97, type: 3}
+  - {fileID: -6577931257846727917, guid: b625ae611cd99d841a1881551e19845a, type: 3}
+  - {fileID: 2246789994369214929, guid: 783e7c2c387a94c438496f7af97908da, type: 3}
+--- !u!114 &6239544761037070766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5854506614371447109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a76a6b2fa63087143b59254d0c73c470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 0}

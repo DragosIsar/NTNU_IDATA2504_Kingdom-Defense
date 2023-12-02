@@ -11,17 +11,19 @@ public class Tower : MonoBehaviour
     
     public int towerTier = 1;
     public List<GameObject> upgrades = new();
-    public TMP_Text tierText;
 
-    private float _damage = 1;
-    private float _attackRate = 1f;
+    public int damage = 1;
+    public float attackRate = 1f;
     private float _attackRateTimer;
-    private float _range = 5f;
-
-    private List<GameObject> towerLevels;
+    public float range = 5f;
+    public int upgradeCost;
+    public int sellValue;
+    
     protected List<Enemy> _targets = new();
     
     private SphereCollider _sphereCollider; 
+    
+    private Material _originalMaterial;
 
     private void Start()
     {
@@ -31,10 +33,13 @@ public class Tower : MonoBehaviour
             return;
         }
         
-        _attackRate = settings.attackRate;
-        _range = settings.range;
+        damage = settings.damage;
+        attackRate = settings.attackRate;
+        range = settings.range;
         _sphereCollider = GetComponent<SphereCollider>();
-        _sphereCollider.radius = _range;
+        _sphereCollider.radius = range;
+        upgradeCost = settings.upgradeCost;
+        sellValue = settings.sellValue;
     }
 
     protected void OnTriggerStay(Collider other)
@@ -73,7 +78,7 @@ public class Tower : MonoBehaviour
         else if (_targets.Count > 0)
         {
             Attack(_targets[0]);
-            _attackRateTimer = 1 / _attackRate;
+            _attackRateTimer = 1 / attackRate;
         }
     }
 
@@ -87,7 +92,8 @@ public class Tower : MonoBehaviour
         _targets.Sort((enemy1, enemy2) => enemy2.GetHealth().CompareTo(enemy1.GetHealth()));
     }
 
-    private Material _originalMaterial;
+    
+
     public void SetGhostMaterial(bool placeable)
     {
         MeshRenderer meshRenderer = GetComponentInChildren<MeshRenderer>();
@@ -100,10 +106,12 @@ public class Tower : MonoBehaviour
     {
         if (towerTier >= settings.maxTier) return;
         towerTier++;
-        _damage = settings.damage + settings.damageIncrease;
-        _attackRate = settings.attackRate + settings.attackRateIncrease;
-        _range = settings.range + settings.rangeIncrease;
-        _sphereCollider.radius = _range;
+        damage += settings.damageIncrease;
+        attackRate += settings.attackRateIncrease;
+        range += settings.rangeIncrease;
+        _sphereCollider.radius = range;
+        upgradeCost += settings.upgradeCostIncrease;
+        sellValue += settings.sellValueIncrease;
         
         foreach (GameObject o in upgrades)
         {

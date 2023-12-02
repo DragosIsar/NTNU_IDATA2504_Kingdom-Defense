@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -19,9 +20,11 @@ public class TowerDetails : MonoBehaviour
     {
         towerNameText.text = tower.settings.towerName;
         towerTierText.text = $"Tier {tower.towerTier}/{tower.settings.maxTier}";
-        towerDamageText.text = $"Damage - {tower.settings.damage}";
-        towerRangeText.text = $"Range - {tower.settings.range}";
-        towerAttackRateText.text = $"Attack Rate - {tower.settings.attackRate}";
+        towerDamageText.text = $"Damage: {tower.damage}";
+        towerRangeText.text = $"Range: {tower.range}";
+        towerAttackRateText.text = $"Attack Rate: {string.Format(tower.attackRate % 1 == 0 ? "{0:0}" : "{0:0.00}", tower.attackRate)}/s";
+        sellButton.GetComponentInChildren<TMP_Text>().text = $"Sell (+{tower.sellValue})";
+        upgradeButton.GetComponentInChildren<TMP_Text>().text = $"Upgrade (-{tower.upgradeCost})";
         
         upgradeButton.interactable = tower.towerTier < tower.settings.maxTier;
         
@@ -35,8 +38,10 @@ public class TowerDetails : MonoBehaviour
         
         upgradeButton.onClick.AddListener(() =>
         {
-            tower.Upgrade();
-            SetTower(tower);
+            if (LevelManager.Instance.TryUpgradeTower(tower))
+            {
+                SetTower(tower);
+            }
         });
     }
 }

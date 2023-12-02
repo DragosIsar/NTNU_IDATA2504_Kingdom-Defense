@@ -29,13 +29,13 @@ public class BeamTower : Tower
 
     protected override void Attack(Enemy enemy)
     {
-        enemy.Damage(settings.damage);
+        enemy.Damage(damage);
     }
     
     public override void Upgrade()
     {
         base.Upgrade();
-        beamOrigin = upgrades[towerTier - 1].transform.Find("SpawningPos");
+        beamOrigin = upgrades[towerTier - 1].transform.Find("ShootingPos");
     }
     
     private void PlayAttackSound()

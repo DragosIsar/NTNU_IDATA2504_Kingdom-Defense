@@ -16,7 +16,7 @@ public class GravityProjectileTower : ShootingTower
         
         if (projectile.TryGetComponent(out ExplodeOnImpact explodeOnImpact))
         {
-            explodeOnImpact.SetDamage(settings.damage);
+            explodeOnImpact.SetDamage(damage);
         }
         
         rb.AddForce(velocity, ForceMode.VelocityChange);

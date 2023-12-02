@@ -23,12 +23,12 @@ public class ShootingTower : Tower
         
         // set projectile direction
         p.SetDirection(dir.normalized);
-        p.SetDamage(settings.damage);
+        p.SetDamage(damage);
     }
 
     public override void Upgrade()
     {
         base.Upgrade();
-        projectileSpawnPoint = upgrades[towerTier - 1].transform.Find("SpawningPos");
+        projectileSpawnPoint = upgrades[towerTier - 1].transform.Find("ShootingPos");
     }
 }

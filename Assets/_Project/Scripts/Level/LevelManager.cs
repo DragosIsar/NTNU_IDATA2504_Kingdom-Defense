@@ -212,7 +212,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void SellTower(Tower tower)
     {
-        CollectCurrency(tower.settings.placementCost);
+        CollectCurrency(tower.settings.sellValue);
         Destroy(tower.gameObject);
     }
     
@@ -277,14 +277,31 @@ public class LevelManager : Singleton<LevelManager>
         
         foreach (Collider hit in hits)
         {
-            print(hit.name);
             if (hit.TryGetComponent(out tower))
             {
-                tower = tower;
                 return true;
             }
         }
 
         return false;
+    }
+    
+    public bool TryUpgradeTower(Tower tower)
+    {
+        if (inLevelCurrency < tower.settings.upgradeCost)
+        {
+            SetStatusText("Not enough currency!");
+            return false;
+        }
+
+        if (tower.towerTier >= tower.settings.maxTier)
+        {
+            SetStatusText("Max tier reached!");
+            return false;
+        }
+        
+        tower.Upgrade();
+        SpendCurrency(tower.settings.upgradeCost);
+        return true;
     }
 }

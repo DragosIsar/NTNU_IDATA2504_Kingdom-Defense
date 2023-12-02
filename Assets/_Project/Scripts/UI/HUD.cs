@@ -113,6 +113,12 @@ public class HUD : MonoBehaviour
 
     public void ShowTowerDetails(Tower tower)
     {
+        towerDetails.gameObject.SetActive(true);
         towerDetails.SetTower(tower);
+    }
+    
+    public void HideTowerDetails()
+    {
+        towerDetails.gameObject.SetActive(false);
     }
 }

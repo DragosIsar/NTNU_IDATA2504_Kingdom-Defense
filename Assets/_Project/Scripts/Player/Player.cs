@@ -45,13 +45,14 @@ public class Player : MonoBehaviour
                 PlaceTowers();
                 break;
             case PlayerState.TowerDetails:
+                SelectTower();
                 ShowTowerDetails();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
         
-        if (InputManager.Instance.PauseAction.triggered && playerState == PlayerState.None)
+        if (InputManager.Instance.PauseAction.triggered)
         {
             hud.TogglePauseMenu();
         }
@@ -141,6 +142,7 @@ public class Player : MonoBehaviour
         {
             case PlayerState.None:
                 hud.SwitchOffAllToggles();
+                hud.HideTowerDetails();
                 break;
             case PlayerState.TowerPlacement:
                 break;
