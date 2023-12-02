@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
 
     private float _maxZoom;
     private Camera _camera;
+    
+    private Transform _sceneAnchorForMousePosition;
 
     private void Awake()
     {
@@ -31,6 +33,7 @@ public class Player : MonoBehaviour
     {
         MoveCamera();
         ZoomCamera();
+        CreateAnchorForMousePosition();
 
         switch (playerState)
         {
@@ -51,30 +54,39 @@ public class Player : MonoBehaviour
 
     private void PlaceTowers()
     {
+        LevelManager.Instance.ShowGhostTower(_sceneAnchorForMousePosition);
+        
         if (InputManager.Instance.PlaceTower.triggered)
         {
             if (GameManager.CursorAboveUI) return;
             if (LevelManager.Instance.TryPlaceTower(MousePositionOnGround()))
             {
                 SetPlayerState(PlayerState.None);
+                LevelManager.Instance.HideGhostTower();
             }
         }
         
         if (InputManager.Instance.CancelAction.triggered)
         {
             SetPlayerState(PlayerState.None);
+            LevelManager.Instance.HideGhostTower();
         }
     }
     
     private Vector3 MousePositionOnGround()
     {
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LevelManager.Instance.proTowerPlacementLayerMask) && hit.collider.CompareTag(GROUND))
+        return Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity) ? hit.point : Vector3.zero;
+    }
+    
+    private void CreateAnchorForMousePosition()
+    {
+        if (!_sceneAnchorForMousePosition)
         {
-            return hit.point;
+            _sceneAnchorForMousePosition = new GameObject("SceneAnchorForMousePosition").transform;
         }
-
-        return Vector3.zero;
+        
+        _sceneAnchorForMousePosition.position = MousePositionOnGround();
     }
 
     private void MoveCamera()

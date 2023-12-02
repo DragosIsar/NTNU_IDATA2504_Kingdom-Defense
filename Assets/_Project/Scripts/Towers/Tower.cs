@@ -79,4 +79,23 @@ public class Tower : MonoBehaviour
     {
         _targets.Sort((enemy1, enemy2) => enemy2.GetHealth().CompareTo(enemy1.GetHealth()));
     }
+
+    private Material _originalMaterial;
+    public void SetGhostMaterial(bool placeable)
+    {
+        MeshRenderer meshRenderer = GetComponentInChildren<MeshRenderer>();
+        if (meshRenderer == null) return;
+        if (_originalMaterial == null) _originalMaterial = meshRenderer.material;
+        meshRenderer.material = placeable ? settings.validGhostMaterial : settings.invalidGhostMaterial;
+    }
+
+    public override bool Equals(object other)
+    {
+        return other switch
+        {
+            null => false,
+            Tower tower => tower.settings == settings,
+            _ => base.Equals(other)
+        };
+    }
 }

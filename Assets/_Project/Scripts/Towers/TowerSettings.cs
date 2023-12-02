@@ -14,7 +14,8 @@ public class TowerSettings : ScriptableObject
     public int damage = 1;
     public float placeRadius = 1f;
 
-    [Header("Upgrades")] public int upgradeCostIncrease = 5;
+    [Header("Upgrades")] 
+    public int upgradeCostIncrease = 5;
     public float rangeIncrease = 1f;
     public float attackRateIncrease = 0.1f;
     public int damageIncrease = 1;
@@ -25,6 +26,10 @@ public class TowerSettings : ScriptableObject
     
     [Header("Sounds")]
     public AudioClip attackSound;
+    
+    [Header("Other")]
+    public Material validGhostMaterial;
+    public Material invalidGhostMaterial;
     
     [ContextMenu("Unlock Tower and Save")]
     public void UnlockTowerAndSave()

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using static GameManager;
 using Random = UnityEngine.Random;
 using LRS;
@@ -24,7 +25,7 @@ public class LevelManager : Singleton<LevelManager>
     private Tower _towerToPlace;
 
     public LayerMask antiTowerPlacementLayerMask;
-    public LayerMask proTowerPlacementLayerMask;
+    public LayerMask placementLayerMask;
     
     public Transform enemySpawnPoint;
     public float enemySpawnInterval = 1f;
@@ -34,6 +35,8 @@ public class LevelManager : Singleton<LevelManager>
     private float _currentLevelTime;
     
     private bool _gameEnded;
+    
+    private Tower _currentGhostTower;
 
     protected override void Awake()
     {
@@ -71,18 +74,8 @@ public class LevelManager : Singleton<LevelManager>
     private void SpawnEnemy()
     {
         Enemy enemy = Instantiate(level.enemyPrefabs[Random.Range(0, level.enemyPrefabs.Length)], enemySpawnPoint.position, Quaternion.identity);
-        
-        if(Random.Range(0,2) < 1)
-        {
-            enemy.InitPath(path2);
-            //Debug.Log("Path 2");
-        }
-        else
-        {
-            enemy.InitPath(path1);
-            //Debug.Log("Path 1");
-        }
-        
+
+        enemy.InitPath(Random.Range(0, 2) < 1 ? path2 : path1);
         _enemyCount++;
     }
     
@@ -160,7 +153,7 @@ public class LevelManager : Singleton<LevelManager>
             return false;
         }
 
-        if (IsTowerLocationValid(pos, _towerToPlace) ||
+        if (!IsTowerLocationValid(pos, _towerToPlace) ||
             pos == Vector3.zero)
         {
             SetStatusText("Not enough space!");
@@ -174,9 +167,55 @@ public class LevelManager : Singleton<LevelManager>
 
     private bool IsTowerLocationValid(Vector3 pos, Tower tower)
     {
-        return Physics.CheckSphere(pos, tower.settings.placeRadius, antiTowerPlacementLayerMask);
+        if (Physics.CheckSphere(pos, tower.settings.placeRadius, antiTowerPlacementLayerMask))
+        {
+            return false;
+        }
+        
+        if (Physics.Raycast(pos + Vector3.up, Vector3.down, 3f, placementLayerMask))
+        {
+            return true;
+        }
+
+        return false;
+
     }
 
+    public void ShowGhostTower(Transform parent)
+    {
+        Vector3 pos = parent.position;
+        
+        if (_currentGhostTower != _towerToPlace)
+        {
+            if (_currentGhostTower)
+            {
+                Destroy(_currentGhostTower.gameObject);
+            }
+            _currentGhostTower = Instantiate(_towerToPlace, pos, Quaternion.identity, parent);
+            _currentGhostTower.GetComponentsInChildren<Collider>().ToList().ForEach(c => c.enabled = false);
+        }
+        else
+        {
+            _currentGhostTower.transform.position = pos;
+        }
+        
+        _currentGhostTower.SetGhostMaterial(IsTowerLocationValid(pos, _towerToPlace));
+    }
+    
+    public void HideGhostTower()
+    {
+        if (_currentGhostTower)
+        {
+            Destroy(_currentGhostTower.gameObject);
+        }
+    }
+
+    public void SellTower(Tower tower)
+    {
+        CollectCurrency(tower.settings.placementCost);
+        Destroy(tower.gameObject);
+    }
+    
     public int GetBaseHealth()
     {
         return baseHealth;
