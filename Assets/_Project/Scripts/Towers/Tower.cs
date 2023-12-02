@@ -18,6 +18,7 @@ public class Tower : MonoBehaviour
     private float _attackRateTimer;
     private float _range = 5f;
 
+    private List<GameObject> towerLevels;
     protected List<Enemy> _targets = new();
     
     private SphereCollider _sphereCollider; 
