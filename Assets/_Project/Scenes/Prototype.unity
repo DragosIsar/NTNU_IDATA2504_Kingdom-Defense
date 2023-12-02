@@ -747,7 +747,7 @@ PrefabInstance:
         type: 3}
       propertyPath: level
       value: 
-      objectReference: {fileID: 11400000, guid: 4e24884518c573a468ded2abc896f5f4,
+      objectReference: {fileID: 11400000, guid: affb1c82d460a864fb64bde2d2a865a6,
         type: 2}
     - target: {fileID: 3205062091304271116, guid: e1af3560f909b80419676ffdabdb41fc,
         type: 3}
@@ -4697,6 +4697,7 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: 6d86649896b45b74082a1a77df805bd4, type: 2}
   towerTier: 1
   upgrades: []
+  rangeIndicator: {fileID: 0}
   damage: 1
   attackRate: 1
   range: 5
@@ -7224,6 +7225,7 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: da2f185a7f5c2e042bc08f9331b48d6f, type: 2}
   towerTier: 1
   upgrades: []
+  rangeIndicator: {fileID: 0}
   damage: 1
   attackRate: 1
   range: 5
