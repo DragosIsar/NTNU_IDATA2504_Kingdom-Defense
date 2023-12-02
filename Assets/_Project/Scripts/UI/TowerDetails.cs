@@ -26,9 +26,11 @@ public class TowerDetails : MonoBehaviour
         sellButton.GetComponentInChildren<TMP_Text>().text = $"Sell (+{tower.sellValue})";
         upgradeButton.GetComponentInChildren<TMP_Text>().text = $"Upgrade (-{tower.upgradeCost})";
         
+        upgradeButton.onClick.RemoveAllListeners();
+        sellButton.onClick.RemoveAllListeners();
+        
         upgradeButton.interactable = tower.towerTier < tower.settings.maxTier;
         
-        sellButton.onClick.RemoveAllListeners();
         sellButton.onClick.AddListener(() =>
         {
             LevelManager.Instance.SellTower(tower);
@@ -41,6 +43,7 @@ public class TowerDetails : MonoBehaviour
             if (LevelManager.Instance.TryUpgradeTower(tower))
             {
                 SetTower(tower);
+                tower.ShowRangeIndicator(true);
             }
         });
     }

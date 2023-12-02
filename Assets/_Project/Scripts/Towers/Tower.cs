@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using static GameManager.Tags;
 
@@ -11,6 +10,7 @@ public class Tower : MonoBehaviour
     
     public int towerTier = 1;
     public List<GameObject> upgrades = new();
+    [SerializeField] private Transform rangeIndicator;
 
     public int damage = 1;
     public float attackRate = 1f;
@@ -21,9 +21,7 @@ public class Tower : MonoBehaviour
     
     protected List<Enemy> _targets = new();
     
-    private SphereCollider _sphereCollider; 
-    
-    private Material _originalMaterial;
+    private SphereCollider _sphereCollider;
 
     private void Start()
     {
@@ -91,14 +89,11 @@ public class Tower : MonoBehaviour
     {
         _targets.Sort((enemy1, enemy2) => enemy2.GetHealth().CompareTo(enemy1.GetHealth()));
     }
-
     
-
     public void SetGhostMaterial(bool placeable)
     {
-        MeshRenderer meshRenderer = GetComponentInChildren<MeshRenderer>();
+        MeshRenderer meshRenderer = upgrades[towerTier - 1].GetComponent<MeshRenderer>();
         if (meshRenderer == null) return;
-        if (_originalMaterial == null) _originalMaterial = meshRenderer.material;
         meshRenderer.material = placeable ? settings.validGhostMaterial : settings.invalidGhostMaterial;
     }
 
@@ -119,14 +114,11 @@ public class Tower : MonoBehaviour
         }
         upgrades[towerTier - 1].SetActive(true);
     }
-
-    public override bool Equals(object other)
+    
+    public void ShowRangeIndicator(bool show)
     {
-        return other switch
-        {
-            null => false,
-            Tower tower => tower.settings == settings,
-            _ => base.Equals(other)
-        };
+        rangeIndicator.gameObject.SetActive(show);
+        range = range > settings.range ? range : settings.range;
+        rangeIndicator.localScale = Vector3.one * (range * 2);
     }
 }

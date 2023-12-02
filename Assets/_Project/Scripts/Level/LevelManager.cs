@@ -37,6 +37,7 @@ public class LevelManager : Singleton<LevelManager>
     private bool _gameEnded;
     
     private Tower _currentGhostTower;
+    private Tower _selectedTower;
 
     protected override void Awake()
     {
@@ -200,6 +201,7 @@ public class LevelManager : Singleton<LevelManager>
         }
         
         _currentGhostTower.SetGhostMaterial(IsTowerLocationValid(pos, _towerToPlace));
+        _currentGhostTower.ShowRangeIndicator(true);
     }
     
     public void HideGhostTower()
@@ -270,7 +272,7 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
-    public static bool TrySelectTower(Vector3 pos, out Tower tower)
+    public bool TrySelectTower(Vector3 pos, out Tower tower)
     {
         tower = null;
         Collider[] hits = Physics.OverlapSphere(pos, 5f);
@@ -279,6 +281,10 @@ public class LevelManager : Singleton<LevelManager>
         {
             if (hit.TryGetComponent(out tower))
             {
+                DeselectTower();
+                _selectedTower = tower;
+                _selectedTower.ShowRangeIndicator(true);
+                GameManager.HUD.ShowTowerDetails(tower);
                 return true;
             }
         }
@@ -286,8 +292,23 @@ public class LevelManager : Singleton<LevelManager>
         return false;
     }
     
-    public bool TryUpgradeTower(Tower tower)
+    public void DeselectTower()
     {
+        GameManager.HUD.HideTowerDetails();
+        if (_selectedTower)
+        {
+            _selectedTower.ShowRangeIndicator(false);
+            _selectedTower = null;
+        }
+    }
+    
+    public bool TryUpgradeTower(Tower tower = null)
+    {
+        if (tower == null)
+        {
+            tower = _selectedTower;
+        }
+        
         if (inLevelCurrency < tower.settings.upgradeCost)
         {
             SetStatusText("Not enough currency!");

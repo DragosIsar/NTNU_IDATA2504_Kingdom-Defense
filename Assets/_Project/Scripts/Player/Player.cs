@@ -63,10 +63,9 @@ public class Player : MonoBehaviour
         if (InputManager.Instance.PlaceTower.triggered)
         {
             if (GameManager.CursorAboveUI) return;
-            if (LevelManager.TrySelectTower(MousePositionOnGround(), out Tower tower))
+            if (LevelManager.Instance.TrySelectTower(MousePositionOnGround(), out _))
             {
                 SetPlayerState(PlayerState.TowerDetails);
-                hud.ShowTowerDetails(tower);
             }
         }
     }
@@ -96,7 +95,6 @@ public class Player : MonoBehaviour
         if (InputManager.Instance.CancelAction.triggered)
         {
             SetPlayerState(PlayerState.None);
-            LevelManager.Instance.HideGhostTower();
         }
     }
     
@@ -143,6 +141,8 @@ public class Player : MonoBehaviour
             case PlayerState.None:
                 hud.SwitchOffAllToggles();
                 hud.HideTowerDetails();
+                LevelManager.Instance.DeselectTower();
+                LevelManager.Instance.HideGhostTower();
                 break;
             case PlayerState.TowerPlacement:
                 break;

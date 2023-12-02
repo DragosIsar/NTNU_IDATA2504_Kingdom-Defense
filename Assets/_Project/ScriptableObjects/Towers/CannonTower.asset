@@ -21,11 +21,13 @@ MonoBehaviour:
   damage: 50
   placeRadius: 5
   maxTier: 3
-  sellValue: 5
-  upgradeCostIncrease: 5
-  rangeIncrease: 1
-  attackRateIncrease: 0.1
-  damageIncrease: 1
+  upgradeCost: 5
+  sellValue: 15
+  upgradeCostIncrease: 10
+  sellValueIncrease: 10
+  rangeIncrease: 10
+  attackRateIncrease: 0.3
+  damageIncrease: 4
   towerName: Canon
   icon: {fileID: 21300000, guid: 9c0942da0b04bb3418530be1153d5982, type: 3}
   attackSound: {fileID: 8300000, guid: 9dda0a3b92003624ba712864565dbe44, type: 3}
