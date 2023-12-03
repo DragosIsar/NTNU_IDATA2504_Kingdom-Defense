@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject levelButtonPrefab;
+    [SerializeField] private LevelButton levelButtonPrefab;
     [SerializeField] private Transform levelButtonContainer;
     [SerializeField] private TowerUnlockUI shopItemPrefab;
     [SerializeField] private Transform shopItemContainer;
@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour
     {
         CreateLevelButtons();
         CreateShopItems();
+        GameManager.Instance.LoadLevelData();
         globalCurrencyText.text = GameManager.GlobalCurrency.ToString();
         GameManager.OnGlobalCurrencyChanged += OnGlobalCurrencyChangedHandler;
     }
@@ -29,15 +30,14 @@ public class MainMenu : MonoBehaviour
     {
         foreach (Level level in GameManager.Instance.levels)
         {
-            GameObject levelButton = Instantiate(levelButtonPrefab, levelButtonContainer);
+            LevelButton levelButton = Instantiate(levelButtonPrefab, levelButtonContainer);
             Button levelButtonComponent = levelButton.GetComponent<Button>();
             levelButtonComponent.onClick.AddListener(() =>
             {
                 GameManager.LoadLevel(level);
             });
             
-            TMP_Text levelButtonText = levelButton.GetComponentInChildren<TMP_Text>();
-            levelButtonText.text = level.name;
+            levelButton.SetLevel(level);
             
             levelButtonComponent.interactable = level.isUnlocked;
         }

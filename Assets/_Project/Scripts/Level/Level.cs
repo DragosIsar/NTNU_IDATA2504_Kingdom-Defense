@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 
 [CreateAssetMenu(fileName = "Level", menuName = "ScriptableObjects/Level")]
@@ -16,8 +17,28 @@ public class Level : ScriptableObject
     public float spawnInterval = 5f;
     public float spawnIntervalMultiplier = 0.9f;
     
+    [Header("UI")]
+    public Sprite thumbnail;
+    
+    [Header("Other")]
     public bool isUnlocked;
     public bool isCompleted;
+    public int globalCurrencyGained;
+    public int globalCurrencyToUnlock;
     
     public Level levelToUnlock;
+    
+    [ContextMenu("Unlock Level and Save")]
+    public void UnlockLevelAndSave()
+    {
+        isUnlocked = true;
+        GameManager.UnlockLevel(this);
+    }
+    
+    [ContextMenu("Lock Level and Save")]
+    public void LockLevelAndSave()
+    {
+        isUnlocked = false;
+        GameManager.LockLevel(this);
+    }
 }

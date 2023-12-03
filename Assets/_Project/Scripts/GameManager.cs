@@ -69,7 +69,7 @@ public class GameManager : Singleton<GameManager>
         useDontDestroyOnLoad = true;
         
         LoadTowerData();
-        //LoadLevelData();
+        LoadLevelData();
     }
 
     private void Update()
@@ -89,7 +89,6 @@ public class GameManager : Singleton<GameManager>
             SceneManager.GetSceneByBuildIndex(level.sceneIndexInBuildSettings).name)
         {
             Debug.LogError("Scene name and index do not match");
-            return;
         }
         SceneManager.LoadScene(level.sceneAssetName);
     }
@@ -133,8 +132,8 @@ public class GameManager : Singleton<GameManager>
         }
     }
     
-    [ContextMenu("Lock All Towers")]
-    public void LockAllTowers ()
+    [ContextMenu("Lock All Towers except always unlocked")]
+    public void LockAllTowersExceptAlwaysUnlocked ()
     {
         foreach (Tower tower in towers)
         {
@@ -185,10 +184,12 @@ public class GameManager : Singleton<GameManager>
             {
                 PlayerPrefs.SetInt(level.name, 0);
             }
+            
+            PlayerPrefs.SetInt(level.name + "_gcg", level.globalCurrencyGained);
         }
     }
-    
-    private void LoadLevelData ()
+
+    public void LoadLevelData ()
     {
         foreach (Level level in levels)
         {
@@ -215,6 +216,15 @@ public class GameManager : Singleton<GameManager>
             {
                 level.isUnlocked = false;
                 level.isCompleted = false;
+            }
+            
+            if (PlayerPrefs.HasKey(level.name + "_gcg"))
+            {
+                level.globalCurrencyGained = PlayerPrefs.GetInt(level.name + "_gcg");
+            }
+            else
+            {
+                level.globalCurrencyGained = 0;
             }
         }
     }
@@ -271,10 +281,49 @@ public class GameManager : Singleton<GameManager>
         }
     }
     
-    public void UnlockLevel(Level level)
+    [ContextMenu("Unlock All Levels")]
+    public void UnlockAllLevels()
     {
-        level.isUnlocked = true;
+        foreach (Level level in levels)
+        {
+            level.isUnlocked = true;
+        }
         SaveLevelData();
+    }
+    
+    [ContextMenu("Lock All Levels except first")]
+    public void LockAllLevelsExceptFirst()
+    {
+        foreach (Level level in levels)
+        {
+            level.isUnlocked = level.name == levels[0].name;
+        }
+        SaveLevelData();
+    }
+    
+    [ContextMenu("Complete All Levels")]
+    public void CompleteAllLevels()
+    {
+        foreach (Level level in levels)
+        {
+            level.isCompleted = true;
+        }
+        SaveLevelData();
+    }
+
+    public static void UnlockAndCompleteLevel(Level level)
+    {
+        PlayerPrefs.SetInt(level.name, 2);
+    }
+
+    public static void UnlockLevel(Level level)
+    {
+        PlayerPrefs.SetInt(level.name, 1);
+    }
+    
+    public static void LockLevel(Level level)
+    {
+        PlayerPrefs.SetInt(level.name, 0);
     }
     
     public void CompleteLevel(Level level)

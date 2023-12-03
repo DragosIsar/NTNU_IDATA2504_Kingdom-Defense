@@ -127,7 +127,8 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (_gameEnded) return;
         _gameEnded = true;
-        level.levelToUnlock.isUnlocked = true;
+        if (level.levelToUnlock != null)
+            level.levelToUnlock.isUnlocked = true;
         PauseGame();
         GameManager.Player.SetPlayerState(PlayerState.None);
         CalculateScore();
@@ -137,8 +138,13 @@ public class LevelManager : Singleton<LevelManager>
 
     private void GrantCurrencyBasedOnScore()
     {
-        int currency = _levelScore / 10;
+        int currency = level.globalCurrencyToUnlock * _levelScore / 100;
+        if (currency > level.globalCurrencyGained)
+        {
+            currency -= level.globalCurrencyGained;
+        }
         AddGlobalCurrency(currency);
+        level.globalCurrencyGained += currency;
     }
 
     private void CalculateScore()

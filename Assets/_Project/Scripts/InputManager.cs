@@ -25,6 +25,12 @@ public class InputManager : Singleton<InputManager>
             playerInput = FindObjectOfType<PlayerInput>();
         }
         
+        if (playerInput == null)
+        {
+            Debug.LogError("No PlayerInput found in scene!");
+            return;
+        }
+        
         MoveAction = playerInput.actions["Move"];
         PlaceTower = playerInput.actions["PlaceTower"];
         LookAction = playerInput.actions["Look"];
