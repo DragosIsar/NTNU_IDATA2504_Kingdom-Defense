@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cccb03be895ae439a547597d6ab1e9, type: 3}
   m_Name: WizardTower
   m_EditorClassIdentifier: 
-  isUnlocked: 1
+  isUnlocked: 0
   alwaysUnlocked: 0
   unlockCost: 3
-  placementCost: 15
-  range: 25
+  placementCost: 50
+  range: 20
   attackRate: 5
   damage: 1
   placeRadius: 1
   maxTier: 3
-  upgradeCost: 5
-  sellValue: 10
-  upgradeCostIncrease: 5
-  sellValueIncrease: 5
+  upgradeCost: 25
+  sellValue: 40
+  upgradeCostIncrease: 15
+  sellValueIncrease: 15
   rangeIncrease: 5
   attackRateIncrease: 1
   damageIncrease: 1

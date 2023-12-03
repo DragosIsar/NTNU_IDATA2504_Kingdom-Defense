@@ -12,22 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cccb03be895ae439a547597d6ab1e9, type: 3}
   m_Name: CannonTower
   m_EditorClassIdentifier: 
-  isUnlocked: 1
+  isUnlocked: 0
   alwaysUnlocked: 0
   unlockCost: 10
-  placementCost: 20
+  placementCost: 100
   range: 30
   attackRate: 0.1
   damage: 50
   placeRadius: 5
   maxTier: 3
-  upgradeCost: 5
-  sellValue: 15
-  upgradeCostIncrease: 10
-  sellValueIncrease: 10
+  upgradeCost: 60
+  sellValue: 90
+  upgradeCostIncrease: 40
+  sellValueIncrease: 40
   rangeIncrease: 10
   attackRateIncrease: 0.3
-  damageIncrease: 4
+  damageIncrease: 5
   towerName: Canon
   icon: {fileID: 21300000, guid: 9c0942da0b04bb3418530be1153d5982, type: 3}
   attackSound: {fileID: 8300000, guid: 9dda0a3b92003624ba712864565dbe44, type: 3}

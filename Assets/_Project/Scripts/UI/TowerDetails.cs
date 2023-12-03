@@ -29,7 +29,7 @@ public class TowerDetails : MonoBehaviour
         upgradeButton.onClick.RemoveAllListeners();
         sellButton.onClick.RemoveAllListeners();
         
-        upgradeButton.interactable = tower.towerTier < tower.settings.maxTier;
+        upgradeButton.gameObject.SetActive(tower.towerTier < tower.settings.maxTier);
         
         sellButton.onClick.AddListener(() =>
         {

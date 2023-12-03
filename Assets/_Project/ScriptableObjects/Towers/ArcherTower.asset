@@ -21,10 +21,12 @@ MonoBehaviour:
   damage: 10
   placeRadius: 5
   maxTier: 3
+  upgradeCost: 15
   sellValue: 5
-  upgradeCostIncrease: 5
+  upgradeCostIncrease: 10
+  sellValueIncrease: 10
   rangeIncrease: 5
-  attackRateIncrease: 0.1
+  attackRateIncrease: 0.333
   damageIncrease: 2
   towerName: Archer
   icon: {fileID: 21300000, guid: b61a36370cdcde14ea58363b27d1e9ce, type: 3}
