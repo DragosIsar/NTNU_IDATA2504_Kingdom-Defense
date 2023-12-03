@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2061675535994449606}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShootingPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3319589985022035820}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShootingPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2510594559971483212}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShootingPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,6 +365,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 79c366cc803a1db4ebc8807ea29108f4,
         type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 79c366cc803a1db4ebc8807ea29108f4,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -466,6 +471,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: lvl-3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a2e3a5467d260a446af60b3b328ad0f0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a2e3a5467d260a446af60b3b328ad0f0,
         type: 3}
@@ -575,6 +585,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: lvl-1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2b7c26fb2deb8684da9479db72d973ad,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2b7c26fb2deb8684da9479db72d973ad,
         type: 3}
