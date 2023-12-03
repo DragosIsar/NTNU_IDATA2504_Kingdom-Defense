@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Project.Scripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static GameManager.Keys;
@@ -17,6 +18,9 @@ public class GameManager : Singleton<GameManager>
     
     public static HUD HUD => Instance._hud ? Instance._hud : FindFirstObjectByType<HUD>();
     private HUD _hud;
+    
+    public static DayNightCycle DayNightCycle => Instance._dayNightCycle ? Instance._dayNightCycle : FindFirstObjectByType<DayNightCycle>();
+    private DayNightCycle _dayNightCycle;
     
     public static bool CursorAboveUI
     {

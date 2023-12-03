@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 namespace _Project.Scripts
 {
     public class DayNightCycle : MonoBehaviour
     {
+        public event Action<bool> OnDayChanged;
+        
         private Vector3 _rot = Vector3.zero;
         public float rotationSpeedInDeg = 6;
 
@@ -29,6 +32,7 @@ namespace _Project.Scripts
 
             Quaternion rotation = t.rotation;
             isDay = !(rotation.eulerAngles.x > 90);
+            OnDayChanged?.Invoke(isDay);
 
             _light.colorTemperature = Mathf.Lerp(1000, 10000, rotation.eulerAngles.x / 135);
 
