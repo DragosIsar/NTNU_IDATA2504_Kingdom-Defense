@@ -25,8 +25,8 @@ MonoBehaviour:
   - {fileID: 1663432052407533762, guid: 0e239f7153af0cd4c9570dcef778a5bf, type: 3}
   spawnInterval: 3
   spawnIntervalMultiplier: 0.9
-  thumbnail: {fileID: 0}
-  isUnlocked: 1
+  thumbnail: {fileID: 21300000, guid: 19a00792637e7794385153709fc03cf4, type: 3}
+  isUnlocked: 0
   isCompleted: 0
   globalCurrencyGained: 0
   globalCurrencyToUnlock: 100
