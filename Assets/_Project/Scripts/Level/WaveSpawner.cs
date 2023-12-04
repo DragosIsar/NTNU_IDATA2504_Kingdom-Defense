@@ -66,6 +66,7 @@ public class WaveSpawner : MonoBehaviour
                     {
                         _readyToCountDown = true;
                         currentWaveIndex++;
+                        Time.timeScale = 1;
                     }
 
                     if (currentWaveIndex >= _waves.Length)
@@ -75,7 +76,6 @@ public class WaveSpawner : MonoBehaviour
                 };
 
                 _totalEnemyCount++;
-
                 yield return new WaitForSeconds(_waves[currentWaveIndex].timeToNextEnemy);
             }
         }

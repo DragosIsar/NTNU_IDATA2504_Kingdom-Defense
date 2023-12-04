@@ -22,12 +22,15 @@ public class Player : MonoBehaviour
     private Camera _camera;
     
     private Transform _sceneAnchorForMousePosition;
+    
+    private float _timeScaleMultiplier;
 
     private void Awake()
     {
         _camera = Camera.main ? Camera.main : GetComponentInChildren<Camera>();
         _maxZoom = _camera.orthographicSize;
         hud ??= GetComponentInChildren<HUD>();
+        _timeScaleMultiplier = Time.timeScale;
     }
     
     private void Update()
@@ -122,13 +125,13 @@ public class Player : MonoBehaviour
 
         Vector3 moveDirection = new Vector3(horizontal, 0, vertical).ToIso();
         moveDirection = transform.TransformDirection(moveDirection);
-        transform.Translate(moveDirection * (moveSpeed * Time.deltaTime));
+        transform.Translate(moveDirection * (moveSpeed * (Time.deltaTime / _timeScaleMultiplier)));
     }
 
     private void ZoomCamera()
     {
         float zoom = InputManager.Instance.Zoom.ReadValue<Vector2>().y;
-        zoom *= zoomSpeed;
+        zoom *= zoomSpeed * (Time.deltaTime / _timeScaleMultiplier);
         _camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize - zoom, minZoom, _maxZoom);
     }
     
@@ -166,5 +169,11 @@ public class Player : MonoBehaviour
     public void LoadNextLevel()
     {
         LevelManager.Instance.LoadNextLevel();
+    }
+    
+    public void SetGlobalSpeed(float speed)
+    {
+        Time.timeScale = speed;
+        _timeScaleMultiplier = speed;
     }
 }
