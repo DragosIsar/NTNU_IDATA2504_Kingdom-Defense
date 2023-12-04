@@ -66,12 +66,15 @@ public class WaveSpawner : MonoBehaviour
                     {
                         _readyToCountDown = true;
                         currentWaveIndex++;
-                        Time.timeScale = 1;
+                        GameManager.Player.SetGlobalSpeed(1);
                     }
 
                     if (currentWaveIndex >= _waves.Length)
                     {
-                        LevelManager.Instance.GameWin();
+                        if (LevelManager.Instance.GetLevel() == GameManager.Instance.levels.Last())
+                            LevelManager.Instance.GameDone();
+                        else
+                            LevelManager.Instance.GameWin();
                     }
                 };
 

@@ -48,6 +48,7 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: 4e24884518c573a468ded2abc896f5f4, type: 2}
   - {fileID: 11400000, guid: 1751033f5599f094dbcb2150653d8416, type: 2}
+  - {fileID: 11400000, guid: a20232fbd3c45cf4db031e8cf07c94a8, type: 2}
   towers:
   - {fileID: 6907952090718696147, guid: c4e24f84fd3b12845a8d2242b4cb9c97, type: 3}
   - {fileID: 2246789994369214929, guid: 783e7c2c387a94c438496f7af97908da, type: 3}

@@ -14,6 +14,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private TMP_Text statusText;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject winPanel;
+    [SerializeField] private GameObject donePanel;
     [SerializeField] private TMP_Text globalCurrencyText;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private GameObject pauseMenu;
@@ -93,11 +94,6 @@ public class HUD : MonoBehaviour
         _statusTextCoroutine = StartCoroutine(SetStatusTextCoroutine(text, duration));
     }
     
-    public void SetStatusText(string text)
-    {
-        statusText.text = text;
-    }
-    
     private IEnumerator SetStatusTextCoroutine(string text, float duration)
     {
         _showWave = false;
@@ -108,6 +104,7 @@ public class HUD : MonoBehaviour
     
     public void ShowGameOverScreen()
     {
+        
         gameOverPanel.SetActive(true);
     }
     
@@ -116,6 +113,11 @@ public class HUD : MonoBehaviour
         scoreText.text = $"Score: {LevelManager.Instance.GetLevelScore()}";
         globalCurrencyText.text = $"Total Global Currency: {GameManager.GlobalCurrency}";
         winPanel.SetActive(true);
+    }
+    
+    public void ShowGameDoneScreen()
+    {
+        donePanel.SetActive(true);
     }
 
     public void TogglePauseMenu()

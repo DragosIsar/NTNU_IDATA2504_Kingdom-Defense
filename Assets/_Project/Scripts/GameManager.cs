@@ -173,7 +173,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
     
-    private void SaveLevelData ()
+    public void SaveLevelData ()
     {
         foreach (Level level in levels)
         {

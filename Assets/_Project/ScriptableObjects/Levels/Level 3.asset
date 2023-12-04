@@ -27,5 +27,5 @@ MonoBehaviour:
   isUnlocked: 0
   isCompleted: 0
   globalCurrencyGained: 0
-  globalCurrencyToUnlock: 35
+  globalCurrencyToUnlock: 100
   levelToUnlock: {fileID: 11400000, guid: 4e24884518c573a468ded2abc896f5f4, type: 2}

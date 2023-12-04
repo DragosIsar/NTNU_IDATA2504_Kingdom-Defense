@@ -88,6 +88,17 @@ public class LevelManager : Singleton<LevelManager>
         GrantCurrencyBasedOnScore();
         GameManager.HUD.ShowGameWinScreen();
     }
+    
+    public void GameDone()
+    {
+        if (_gameEnded) return;
+        _gameEnded = true;
+        PauseGame();
+        GameManager.Player.SetPlayerState(PlayerState.None);
+        CalculateScore();
+        GrantCurrencyBasedOnScore();
+        GameManager.HUD.ShowGameDoneScreen();
+    }
 
     private void GrantCurrencyBasedOnScore()
     {
@@ -98,6 +109,7 @@ public class LevelManager : Singleton<LevelManager>
         }
         AddGlobalCurrency(currency);
         level.globalCurrencyGained += currency;
+        GameManager.Instance.SaveLevelData();
     }
 
     private void CalculateScore()
