@@ -79,7 +79,7 @@ public class LevelManager : Singleton<LevelManager>
         
         if (level.levelToUnlock != null)
         {
-            UnlockLevel(level.levelToUnlock);
+            level.levelToUnlock.UnlockLevelAndSave();
         }
 
         PauseGame();

@@ -27,6 +27,6 @@ public class CameraController : MonoBehaviour
         float vertical = InputManager.Instance.MoveAction.ReadValue<Vector2>().y;
 
         Vector3 moveDirection = new(horizontal, 0, vertical);
-        transform.Translate(moveDirection * speed * Time.deltaTime);
+        transform.Translate(moveDirection * (speed * Time.deltaTime));
     }
 }

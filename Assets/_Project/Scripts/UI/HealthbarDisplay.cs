@@ -1,35 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthbarDisplay : MonoBehaviour
 {
-    private Slider _slider;
+    private TMP_Text _text;
 
     private void OnEnable()
     {
         LevelManager.Instance.onHealthChanged += OnHealthChangedHandler;
     }
-    
-    private void OnDisable()
-    {
-        LevelManager.Instance.onHealthChanged -= OnHealthChangedHandler;
-    }
 
     private void Awake()
     {
-        _slider = GetComponent<Slider>();
+        _text = GetComponent<TMP_Text>();
     }
 
     private void Start()
     {
-        _slider.value = 1;
+        _text.text = $"{LevelManager.Instance.GetBaseHealth()}/{LevelManager.Instance.GetBaseMaxHealth()}";
     }
 
     private void OnHealthChangedHandler(int health)
     {
-        _slider.value = health / LevelManager.Instance.GetBaseMaxHealth();
+        _text.text = $"{health}/{LevelManager.Instance.GetBaseMaxHealth()}";
     }
 }

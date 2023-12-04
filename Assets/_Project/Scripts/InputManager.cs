@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using LRS;
 
 public class InputManager : Singleton<InputManager>
 {
-    [SerializeField] private PlayerInput playerInput;
+    public static PlayerInput PlayerInput => _playerInput ? _playerInput : FindObjectOfType<PlayerInput>();
+    private static PlayerInput _playerInput;
     
     public InputAction MoveAction { private set; get; }
     public InputAction PlaceTower { private set; get; }
@@ -16,26 +18,11 @@ public class InputManager : Singleton<InputManager>
     protected override void Awake()
     {
         base.Awake();
-        if (playerInput == null && TryGetComponent(out PlayerInput component))
-        {
-            playerInput = component;
-        }
-        else
-        {
-            playerInput = FindObjectOfType<PlayerInput>();
-        }
-        
-        if (playerInput == null)
-        {
-            Debug.LogError("No PlayerInput found in scene!");
-            return;
-        }
-        
-        MoveAction = playerInput.actions["Move"];
-        PlaceTower = playerInput.actions["PlaceTower"];
-        LookAction = playerInput.actions["Look"];
-        Zoom = playerInput.actions["Zoom"];
-        CancelAction = playerInput.actions["Cancel"];
-        PauseAction = playerInput.actions["Pause"];
+        MoveAction = PlayerInput.actions["Move"];
+        PlaceTower = PlayerInput.actions["PlaceTower"];
+        LookAction = PlayerInput.actions["Look"];
+        Zoom = PlayerInput.actions["Zoom"];
+        CancelAction = PlayerInput.actions["Cancel"];
+        PauseAction = PlayerInput.actions["Pause"];
     }
 }

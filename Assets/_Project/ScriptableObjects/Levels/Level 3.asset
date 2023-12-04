@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 3
   m_EditorClassIdentifier: 
   sceneAssetName: Level 3
-  sceneIndexInBuildSettings: 4
+  sceneIndexInBuildSettings: 3
   maxBaseHealth: 120
   startingCurrency: 140
   waves:
@@ -28,4 +28,4 @@ MonoBehaviour:
   isCompleted: 0
   globalCurrencyGained: 0
   globalCurrencyToUnlock: 100
-  levelToUnlock: {fileID: 11400000, guid: 4e24884518c573a468ded2abc896f5f4, type: 2}
+  levelToUnlock: {fileID: 0}

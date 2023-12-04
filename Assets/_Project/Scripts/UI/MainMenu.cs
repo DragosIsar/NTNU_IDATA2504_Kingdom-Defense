@@ -62,4 +62,14 @@ public class MainMenu : MonoBehaviour
             });
         }
     }
+
+    public void Quit()
+    {
+        GameManager.Quit();
+    }
+    
+    public void PlayNextUnlockedLevel()
+    {
+        GameManager.Instance.PlayNextUnlockedLevel();
+    }
 }

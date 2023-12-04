@@ -69,8 +69,11 @@ public class GameManager : Singleton<GameManager>
 
     protected override void Awake()
     {
-        base.Awake();
         useDontDestroyOnLoad = true;
+        base.Awake();
+
+        UnlockTower(towers[0]);
+        UnlockLevel(levels[0]);
         
         LoadTowerData();
         LoadLevelData();
@@ -337,7 +340,7 @@ public class GameManager : Singleton<GameManager>
         SaveLevelData();
     }
 
-    public void Quit()
+    public static void Quit()
     {
         Application.Quit();
     }
