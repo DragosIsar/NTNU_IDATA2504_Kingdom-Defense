@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneAssetName: Level 2
   sceneIndexInBuildSettings: 1
-  levelDurationInSec: 300
+  levelDurationInSec: 1200
   maxBaseHealth: 100
   startingCurrency: 10
   enemyPrefabs:
