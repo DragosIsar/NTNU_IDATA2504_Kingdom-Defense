@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Wizard Buffed 1
   m_EditorClassIdentifier: 
   speed: 2
-  damage: 2
-  health: 30
-  reward: 3
+  damage: 1
+  health: 75
+  reward: 10
   deathEffect: {fileID: 7581132033923737324, guid: 70a3fedfbc4391b4aa05fa6cca5a7017,
     type: 3}

@@ -76,8 +76,12 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (_gameEnded) return;
         _gameEnded = true;
+        
         if (level.levelToUnlock != null)
-            level.levelToUnlock.isUnlocked = true;
+        {
+            UnlockLevel(level.levelToUnlock);
+        }
+
         PauseGame();
         GameManager.Player.SetPlayerState(PlayerState.None);
         CalculateScore();
@@ -219,6 +223,10 @@ public class LevelManager : Singleton<LevelManager>
         if (level.levelToUnlock != null)
         {
             LoadLevel(level.levelToUnlock);
+        }
+        else
+        {
+            GameManager.LoadMainMenu();
         }
     }
 

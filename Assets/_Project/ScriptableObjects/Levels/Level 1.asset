@@ -14,13 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneAssetName: Level 1
   sceneIndexInBuildSettings: 2
-  levelDurationInSec: 300
   maxBaseHealth: 100
   startingCurrency: 10
   waves:
-  - {fileID: 11400000, guid: 03e53e956645383438b9d217b75b67eb, type: 2}
-  - {fileID: 11400000, guid: 03e53e956645383438b9d217b75b67eb, type: 2}
-  - {fileID: 11400000, guid: 03e53e956645383438b9d217b75b67eb, type: 2}
+  - {fileID: 11400000, guid: b30d13e04e6c5d9468d4904ca5b92031, type: 2}
+  - {fileID: 11400000, guid: fb1a96764211a37439e55d2b8f9564c7, type: 2}
+  - {fileID: 11400000, guid: 146ba150cb6d1b84b945ffc22b34c069, type: 2}
   timeBetweenWaves: 5
   thumbnail: {fileID: 21300000, guid: 19a00792637e7794385153709fc03cf4, type: 3}
   isUnlocked: 1

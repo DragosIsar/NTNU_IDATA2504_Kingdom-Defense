@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AxeEnemy Buffed 2
   m_EditorClassIdentifier: 
   speed: 5
-  damage: 50
-  health: 50
-  reward: 6
+  damage: 15
+  health: 30
+  reward: 3
   deathEffect: {fileID: 7581132033923737324, guid: 70a3fedfbc4391b4aa05fa6cca5a7017,
     type: 3}

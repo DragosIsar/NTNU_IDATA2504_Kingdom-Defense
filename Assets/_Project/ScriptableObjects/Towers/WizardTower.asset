@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUnlocked: 1
   alwaysUnlocked: 0
-  unlockCost: 3
-  placementCost: 50
+  unlockCost: 50
+  placementCost: 75
   range: 20
   attackRate: 5
   damage: 1
   placeRadius: 5
   maxTier: 3
-  upgradeCost: 25
-  sellValue: 40
-  upgradeCostIncrease: 15
-  sellValueIncrease: 15
+  upgradeCost: 100
+  sellValue: 60
+  upgradeCostIncrease: 50
+  sellValueIncrease: 20
   rangeIncrease: 5
   attackRateIncrease: 1
   damageIncrease: 1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AxeEnemy
   m_EditorClassIdentifier: 
   speed: 2
-  damage: 1
+  damage: 5
   health: 10
   reward: 1
   deathEffect: {fileID: 7581132033923737324, guid: 70a3fedfbc4391b4aa05fa6cca5a7017,
