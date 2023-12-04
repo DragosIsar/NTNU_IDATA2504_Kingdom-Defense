@@ -24,7 +24,8 @@ public class HUD : MonoBehaviour
     
     private Coroutine _statusTextCoroutine;
     
-    private bool _showTime = true;
+    private bool _showWave = true;
+    private bool _showCountdown;
     
     private void Awake()
     {
@@ -38,7 +39,14 @@ public class HUD : MonoBehaviour
 
     private void Update()
     {
-        if (_showTime) statusText.text = LevelManager.Instance.GetCurrentLevelTimeFormatted();
+        if (_showWave)
+        {
+            statusText.text = LevelManager.Instance.waveSpawner.GetWaveStatusText();
+        }
+        if (_showCountdown)
+        {
+            statusText.text = LevelManager.Instance.waveSpawner.GetCountdownText();
+        }
     }
     
     private void CreateTowerPlacementToggles()
@@ -85,12 +93,17 @@ public class HUD : MonoBehaviour
         _statusTextCoroutine = StartCoroutine(SetStatusTextCoroutine(text, duration));
     }
     
+    public void SetStatusText(string text)
+    {
+        statusText.text = text;
+    }
+    
     private IEnumerator SetStatusTextCoroutine(string text, float duration)
     {
-        _showTime = false;
+        _showWave = false;
         statusText.text = text;
         yield return new WaitForSeconds(duration);
-        _showTime = true;
+        _showWave = true;
     }
     
     public void ShowGameOverScreen()
@@ -120,5 +133,11 @@ public class HUD : MonoBehaviour
     public void HideTowerDetails()
     {
         towerDetails.gameObject.SetActive(false);
+    }
+    
+    public void SetShowCountdown(bool showCountdown)
+    {
+        _showCountdown = showCountdown;
+        _showWave = !showCountdown;
     }
 }

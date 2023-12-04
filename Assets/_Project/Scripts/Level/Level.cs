@@ -13,9 +13,9 @@ public class Level : ScriptableObject
     public float levelDurationInSec = 300f;
     public int maxBaseHealth = 100;
     public int startingCurrency = 100;
-    public Enemy[] enemyPrefabs;
-    public float spawnInterval = 5f;
-    public float spawnIntervalMultiplier = 0.9f;
+    public Wave[] waves;
+    [Tooltip("in seconds")]
+    public float timeBetweenWaves = 10f;
     
     [Header("UI")]
     public Sprite thumbnail;
