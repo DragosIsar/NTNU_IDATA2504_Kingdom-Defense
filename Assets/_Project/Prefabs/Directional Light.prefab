@@ -131,5 +131,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613f2896f08a790469559a79f7cb000d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeedInDeg: 3
+  rotationSpeedInDeg: 1
   isDay: 1

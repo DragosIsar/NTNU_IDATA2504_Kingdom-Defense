@@ -13,18 +13,16 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   sceneAssetName: Level 2
-  sceneIndexInBuildSettings: 1
-  levelDurationInSec: 1200
+  sceneIndexInBuildSettings: 3
   maxBaseHealth: 100
-  startingCurrency: 10
-  enemyPrefabs:
-  - {fileID: 1663432052407533762, guid: c33f005c7083f4b4daf31d61ab02b605, type: 3}
-  - {fileID: 1663432052407533762, guid: c33f005c7083f4b4daf31d61ab02b605, type: 3}
-  - {fileID: 1663432052407533762, guid: c33f005c7083f4b4daf31d61ab02b605, type: 3}
-  - {fileID: 1663432052407533762, guid: c33f005c7083f4b4daf31d61ab02b605, type: 3}
-  - {fileID: 1663432052407533762, guid: 0e239f7153af0cd4c9570dcef778a5bf, type: 3}
-  spawnInterval: 1
-  spawnIntervalMultiplier: 0.9
+  startingCurrency: 50
+  waves:
+  - {fileID: 11400000, guid: d89adf138d50f434db4d7222ea5df23f, type: 2}
+  - {fileID: 11400000, guid: 65d544a6b604cc443bfed5a07d40a8c6, type: 2}
+  - {fileID: 11400000, guid: 0a3d7a6b833f5ab4cbcf1cb0669b8a1a, type: 2}
+  - {fileID: 11400000, guid: 9af4568988d22b241b41f741ac0542ff, type: 2}
+  - {fileID: 11400000, guid: 11650b8acb6735d428f1670b25b4dcce, type: 2}
+  timeBetweenWaves: 10
   thumbnail: {fileID: 0}
   isUnlocked: 0
   isCompleted: 0
