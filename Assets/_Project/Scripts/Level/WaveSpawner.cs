@@ -9,88 +9,114 @@ using LRS;
 public class WaveSpawner : MonoBehaviour
 {
     [SerializeField] private float countdown;
-    // [SerializeField] private GameObject spawnPoint;
 
-    public List<Transform> spawnLocations;
+    [SerializeField] private List<GameObject> pathContainers;
+    
+    [SerializeField] private Transform enemyContainer;
+    
+    private List<List<Transform>> _paths = new();
 
-    [SerializeField] private List<Transform> path1;
-    [SerializeField] private List<Transform> path2;
-
-    public Wave[] waves;
+    private Wave[] _waves;
     public int currentWaveIndex = 0;
-    private int _enemyCount;
+    private int _totalEnemyCount;
 
-    private bool readyToCountDown;
+    private bool _readyToCountDown;
     private void Start()
     {
-        readyToCountDown = true;
-
-        for (int i = 0; i < waves.Length; i++)
-        {
-            waves[i].enemiesLeft = waves[i].enemyPrefabs.Length;
-        }
+        _readyToCountDown = true;
+        
+        GeneratePaths();
     }
     private void Update()
     {
-        if (currentWaveIndex >= waves.Length)
-        {
-            Debug.Log("You survived every wave!");
-            // after adding textmeshpro with wave number, update it with "Level complete"
-            // show the menu UI with quit to main menu or button to load next level
-            return;
-        }
-
-        if (readyToCountDown == true)
+        if (_readyToCountDown)
         {
             countdown -= Time.deltaTime;
+            GameManager.HUD.SetShowCountdown(true);
         }
 
         if (countdown <= 0)
         {
-            readyToCountDown = false;
+            _readyToCountDown = false;
+            GameManager.HUD.SetShowCountdown(false);
 
-            countdown = waves[currentWaveIndex].timeToNextWave;
+            countdown = LevelManager.Instance.GetLevel().timeBetweenWaves;
 
             StartCoroutine(SpawnWave());
-        }
-
-        if (waves[currentWaveIndex].enemiesLeft == 0)
-        {
-            readyToCountDown = true;
-
-            currentWaveIndex++;
         }
     }
     private IEnumerator SpawnWave()
     {
-        if (currentWaveIndex < waves.Length)
+        if (currentWaveIndex < _waves.Length)
         {
-            for (int i = 0; i < waves[currentWaveIndex].enemyPrefabs.Length; i++)
+            SetEnemiesLeft();
+            foreach (Enemy enemyPrefab in _waves[currentWaveIndex].enemyPrefabs)
             {
-                int randomIndex = Random.Range(0, spawnLocations.Count);
+                List<Transform> path = _paths[Random.Range(0, _paths.Count)];
 
-                Transform spawnPoint = spawnLocations[randomIndex];
+                Transform spawnPoint = path[0];
 
-                Enemy enemy = Instantiate(waves[currentWaveIndex].enemyPrefabs[i], spawnPoint.position, Quaternion.identity);
+                Enemy enemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+                if (enemyContainer) enemy.transform.SetParent(enemyContainer);
+                enemy.InitPath(path);
+                enemy.OnDeath += () =>
+                {
+                    if (currentWaveIndex < _waves.Length)_waves[currentWaveIndex].enemiesLeft--;
+                    if (_waves[currentWaveIndex].enemiesLeft == 0)
+                    {
+                        _readyToCountDown = true;
+                        currentWaveIndex++;
+                    }
 
-                enemy.transform.SetParent(spawnPoint.transform);
+                    if (currentWaveIndex >= _waves.Length)
+                    {
+                        LevelManager.Instance.GameWin();
+                    }
+                };
 
-                enemy.InitPath(Random.Range(0, 2) < 1 ? path2 : path1);
+                _totalEnemyCount++;
 
-                _enemyCount++;
-
-                yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextEnemy);
+                yield return new WaitForSeconds(_waves[currentWaveIndex].timeToNextEnemy);
             }
         }
     }
-}
 
-[System.Serializable]
-public class Wave
-{
-    public Enemy[] enemyPrefabs;
-    public float timeToNextEnemy;
-    public float timeToNextWave;
+    private void GeneratePaths()
+    {
+        foreach (GameObject pathContainer in pathContainers)
+        {
+            List<Transform> path = new List<Transform>();
 
-    [HideInInspector] public int enemiesLeft;
+            foreach (Transform child in pathContainer.transform)
+            {
+                path.Add(child);
+            }
+
+            _paths.Add(path);
+        }
+    }
+    
+    public void SetWaves(Wave[] waves)
+    {
+        _waves = waves;
+    }
+
+    public string GetWaveStatusText()
+    {
+        if (currentWaveIndex >= _waves.Length) return "Win!";
+        return "Wave: " + (currentWaveIndex + 1) + "/" + _waves.Length;
+    }
+
+    public string GetCountdownText()
+    {
+        return "Next wave in: " + Mathf.Round(countdown);
+    }
+
+    public void SetEnemiesLeft()
+    {
+        foreach (Wave wave in _waves)
+        {
+            wave.enemiesLeft = wave.enemyPrefabs.Length;
+        }
+    }
 }

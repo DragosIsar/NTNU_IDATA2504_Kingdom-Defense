@@ -17,17 +17,14 @@ MonoBehaviour:
   levelDurationInSec: 300
   maxBaseHealth: 100
   startingCurrency: 10
-  enemyPrefabs:
-  - {fileID: 1663432052407533762, guid: c33f005c7083f4b4daf31d61ab02b605, type: 3}
-  - {fileID: 1663432052407533762, guid: c33f005c7083f4b4daf31d61ab02b605, type: 3}
-  - {fileID: 1663432052407533762, guid: c33f005c7083f4b4daf31d61ab02b605, type: 3}
-  - {fileID: 1663432052407533762, guid: c33f005c7083f4b4daf31d61ab02b605, type: 3}
-  - {fileID: 1663432052407533762, guid: 0e239f7153af0cd4c9570dcef778a5bf, type: 3}
-  spawnInterval: 3
-  spawnIntervalMultiplier: 0.9
+  waves:
+  - {fileID: 11400000, guid: 03e53e956645383438b9d217b75b67eb, type: 2}
+  - {fileID: 11400000, guid: 03e53e956645383438b9d217b75b67eb, type: 2}
+  - {fileID: 11400000, guid: 03e53e956645383438b9d217b75b67eb, type: 2}
+  timeBetweenWaves: 5
   thumbnail: {fileID: 21300000, guid: 19a00792637e7794385153709fc03cf4, type: 3}
-  isUnlocked: 0
+  isUnlocked: 1
   isCompleted: 0
-  globalCurrencyGained: 0
+  globalCurrencyGained: 100
   globalCurrencyToUnlock: 100
   levelToUnlock: {fileID: 11400000, guid: 1751033f5599f094dbcb2150653d8416, type: 2}

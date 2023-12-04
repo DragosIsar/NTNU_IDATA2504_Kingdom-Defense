@@ -13,10 +13,9 @@ public class LevelManager : Singleton<LevelManager>
     public Action<int> onHealthChanged;
     
     [SerializeField] private Level level;
-    [SerializeField] private List<Transform> path1;
-    [SerializeField] private List<Transform> path2;
+    [SerializeField] public WaveSpawner waveSpawner;
 
-    [SerializeField] private int baseHealth = 100;
+    private int _baseHealth;
 
     public int inLevelCurrency;
     private int _levelScore = -1;
@@ -27,13 +26,6 @@ public class LevelManager : Singleton<LevelManager>
     public LayerMask antiTowerPlacementLayerMask;
     public LayerMask placementLayerMask;
     
-    public Transform enemySpawnPoint;
-    public float enemySpawnInterval = 1f;
-    private float _enemySpawnTimer;
-    private int _enemyCount;
-
-    private float _currentLevelTime;
-    
     private bool _gameEnded;
     
     private Tower _currentGhostTower;
@@ -43,63 +35,23 @@ public class LevelManager : Singleton<LevelManager>
     {
         base.Awake();
         useDontDestroyOnLoad = false;
-        baseHealth = level.maxBaseHealth;
+        _baseHealth = level.maxBaseHealth;
         inLevelCurrency = level.startingCurrency;
-        enemySpawnInterval = level.spawnInterval;
-        _currentLevelTime = level.levelDurationInSec;
-    }
-
-    private void Update()
-    {
-        if (_enemySpawnTimer > 0)
-        {
-            _enemySpawnTimer -= Time.deltaTime;
-        }
-        else
-        {
-            SpawnEnemy();
-            IncreaseSpawnInterval();    
-            _enemySpawnTimer = enemySpawnInterval;
-        }
-        
-        if (_currentLevelTime > 0)
-        {
-            _currentLevelTime -= Time.deltaTime;
-        }
-        else
-        {
-            GameWin();
-        }
-    }
-
-    private void SpawnEnemy()
-    {
-        Enemy enemy = Instantiate(level.enemyPrefabs[Random.Range(0, level.enemyPrefabs.Length)], enemySpawnPoint.position, Quaternion.identity);
-
-        enemy.InitPath(Random.Range(0, 2) < 1 ? path2 : path1);
-        _enemyCount++;
-    }
-    
-    private void IncreaseSpawnInterval()
-    {
-        if (_enemyCount % 12 == 0)
-        {
-            enemySpawnInterval *= level.spawnIntervalMultiplier;
-        }
+        waveSpawner.SetWaves(level.waves);
     }
     
     public void DamageBase(int damage)
     {
-        if (baseHealth - damage <= 0)
+        if (_baseHealth - damage <= 0)
         {
-            baseHealth = 0;
+            _baseHealth = 0;
             GameOver();
         }
         else
         {
-            baseHealth -= damage;
+            _baseHealth -= damage;
         }
-        onHealthChanged?.Invoke(baseHealth);
+        onHealthChanged?.Invoke(_baseHealth);
     }
 
     public void CollectCurrency(int amount)
@@ -123,7 +75,7 @@ public class LevelManager : Singleton<LevelManager>
         GameManager.HUD.ShowGameOverScreen();
     }
 
-    private void GameWin()
+    public void GameWin()
     {
         if (_gameEnded) return;
         _gameEnded = true;
@@ -149,7 +101,7 @@ public class LevelManager : Singleton<LevelManager>
 
     private void CalculateScore()
     {
-        _levelScore = baseHealth / level.maxBaseHealth * 100;
+        _levelScore = _baseHealth / level.maxBaseHealth * 100;
     }
 
     public bool TryPlaceTower(Vector3 pos)
@@ -226,7 +178,7 @@ public class LevelManager : Singleton<LevelManager>
     
     public int GetBaseHealth()
     {
-        return baseHealth;
+        return _baseHealth;
     }
 
     public void SetTowerToPlace(Tower tower)
@@ -253,11 +205,6 @@ public class LevelManager : Singleton<LevelManager>
     public float GetBaseMaxHealth()
     {
         return level.maxBaseHealth;
-    }
-    
-    public string GetCurrentLevelTimeFormatted()
-    {
-        return TimeSpan.FromSeconds(_currentLevelTime).ToString(@"mm\:ss");
     }
 
     public string GetLevelScore()
@@ -330,5 +277,10 @@ public class LevelManager : Singleton<LevelManager>
         tower.Upgrade();
         SpendCurrency(tower.settings.upgradeCost);
         return true;
+    }
+
+    public Level GetLevel()        
+    {
+        return level;
     }
 }
