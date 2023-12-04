@@ -21,10 +21,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7076235e30cc2f54db31b2ba241184f0, type: 2}
   - {fileID: 11400000, guid: 01c7b42a9b04e304981a96687017c8d7, type: 2}
   - {fileID: 11400000, guid: a9ec974ba92082f49938a2dcb2c0523b, type: 2}
+  - {fileID: 11400000, guid: 0de96043065c8f648a97e45afcdc7ffc, type: 2}
   timeBetweenWaves: 5
   thumbnail: {fileID: 21300000, guid: 19a00792637e7794385153709fc03cf4, type: 3}
-  isUnlocked: 1
+  isUnlocked: 0
   isCompleted: 0
-  globalCurrencyGained: 35
+  globalCurrencyGained: 0
   globalCurrencyToUnlock: 35
   levelToUnlock: {fileID: 11400000, guid: 4e24884518c573a468ded2abc896f5f4, type: 2}
