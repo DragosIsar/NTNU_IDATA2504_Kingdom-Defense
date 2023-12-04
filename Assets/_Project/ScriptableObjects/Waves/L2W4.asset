@@ -189,7 +189,7 @@ MonoBehaviour:
   - {fileID: 3822633152259954136, guid: 37d48de92b1946d438477815ea6704cd, type: 3}
   - {fileID: 1663432052407533762, guid: 5d83ca254859d7447aed858b79c9f45c, type: 3}
   - {fileID: 3822633152259954136, guid: 37d48de92b1946d438477815ea6704cd, type: 3}
-  - {fileID: 1260824798039947543, guid: 939c1100dbb84e748807dce3e5fd8caf, type: 3}
+  - {fileID: 3822633152259954136, guid: 37d48de92b1946d438477815ea6704cd, type: 3}
   - {fileID: 1260824798039947543, guid: 939c1100dbb84e748807dce3e5fd8caf, type: 3}
   - {fileID: 3822633152259954136, guid: 716bff5a2a538af4aac124c20c7f471d, type: 3}
   - {fileID: 3822633152259954136, guid: 716bff5a2a538af4aac124c20c7f471d, type: 3}
@@ -214,4 +214,4 @@ MonoBehaviour:
   - {fileID: 3822633152259954136, guid: 37d48de92b1946d438477815ea6704cd, type: 3}
   - {fileID: 3822633152259954136, guid: 37d48de92b1946d438477815ea6704cd, type: 3}
   timeToNextEnemy: 0.75
-  enemiesLeft: 193
+  enemiesLeft: 200
