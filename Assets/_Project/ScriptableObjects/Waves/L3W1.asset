@@ -56,5 +56,5 @@ MonoBehaviour:
   - {fileID: 3822633152259954136, guid: 716bff5a2a538af4aac124c20c7f471d, type: 3}
   - {fileID: 3822633152259954136, guid: 716bff5a2a538af4aac124c20c7f471d, type: 3}
   - {fileID: 3822633152259954136, guid: 716bff5a2a538af4aac124c20c7f471d, type: 3}
-  timeToNextEnemy: 0
+  timeToNextEnemy: 3.5
   enemiesLeft: 43
