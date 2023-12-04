@@ -42,14 +42,11 @@ public class LevelManager : Singleton<LevelManager>
     
     public void DamageBase(int damage)
     {
-        if (_baseHealth - damage <= 0)
+        _baseHealth -= damage;
+        if (_baseHealth <= 0)
         {
             _baseHealth = 0;
             GameOver();
-        }
-        else
-        {
-            _baseHealth -= damage;
         }
         onHealthChanged?.Invoke(_baseHealth);
     }

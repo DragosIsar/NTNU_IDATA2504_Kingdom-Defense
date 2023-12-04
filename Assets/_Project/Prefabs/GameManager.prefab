@@ -50,8 +50,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1751033f5599f094dbcb2150653d8416, type: 2}
   towers:
   - {fileID: 6907952090718696147, guid: c4e24f84fd3b12845a8d2242b4cb9c97, type: 3}
-  - {fileID: -6577931257846727917, guid: b625ae611cd99d841a1881551e19845a, type: 3}
   - {fileID: 2246789994369214929, guid: 783e7c2c387a94c438496f7af97908da, type: 3}
+  - {fileID: -6577931257846727917, guid: b625ae611cd99d841a1881551e19845a, type: 3}
 --- !u!114 &6239544761037070766
 MonoBehaviour:
   m_ObjectHideFlags: 0

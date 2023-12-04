@@ -94,6 +94,7 @@ public class GameManager : Singleton<GameManager>
         {
             Debug.LogError("Scene name and index do not match");
         }
+        ResumeGame();
         SceneManager.LoadScene(level.sceneAssetName);
     }
     

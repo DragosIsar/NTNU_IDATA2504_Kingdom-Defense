@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4504617791372969255}
   - component: {fileID: 3827904137834573110}
   - component: {fileID: 4532692637427194679}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TestEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -70,10 +70,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c230d1b542d064c866530215b3f695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 1
-  damage: 1
-  health: 5
+  enemyType: {fileID: 0}
+  animator: {fileID: 0}
+  hitPointTransform: {fileID: 0}
+  deathSound: {fileID: 0}
+  hitSound: {fileID: 0}
 --- !u!54 &4532692637427194679
 Rigidbody:
   m_ObjectHideFlags: 0
