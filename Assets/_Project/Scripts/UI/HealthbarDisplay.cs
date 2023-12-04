@@ -12,6 +12,11 @@ public class HealthbarDisplay : MonoBehaviour
     {
         LevelManager.Instance.onHealthChanged += OnHealthChangedHandler;
     }
+    
+    private void OnDisable()
+    {
+        LevelManager.Instance.onHealthChanged -= OnHealthChangedHandler;
+    }
 
     private void Awake()
     {
@@ -20,7 +25,7 @@ public class HealthbarDisplay : MonoBehaviour
 
     private void Start()
     {
-        OnHealthChangedHandler(LevelManager.Instance.GetBaseHealth());
+        _slider.value = 1;
     }
 
     private void OnHealthChangedHandler(int health)
