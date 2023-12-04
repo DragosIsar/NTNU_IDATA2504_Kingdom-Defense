@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6605992, y: 2.0222447, z: 1.2744095}
+  m_LocalScale: {x: 1.6605992, y: 2.0222447, z: 1.2744094}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8627853579931476310}
@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 8627853579931476310}
   - component: {fileID: 2554717534601413377}
   - component: {fileID: 282132779475251931}
+  - component: {fileID: 7289429848412359719}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -207,3 +208,15 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &7289429848412359719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5815795624143577088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33eadfea87377a44eb3fa7cfd5022b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
