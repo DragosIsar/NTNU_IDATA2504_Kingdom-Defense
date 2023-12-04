@@ -75,16 +75,16 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 520
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 3.10558
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.55279, z: 0}
 --- !u!114 &1663432052407533762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,12 +558,12 @@ SkinnedMeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 3184a7f77f4b37649a71f8a71dcffa12, type: 2}
   - {fileID: -8367705006879899164, guid: 7f99737a28434ea47982c4cb0e1c058c, type: 3}
-  - {fileID: 2100000, guid: c9a70623c7755814f84a80d5bf2e44fa, type: 2}
+  - {fileID: 2100000, guid: 406cca44f71a4eb43a155584d666aa31, type: 2}
   - {fileID: 2100000, guid: 854880fa387ac3f4783f10fa26a6ae65, type: 2}
   - {fileID: 2100000, guid: b217651385c1c7743bdfa89f5913091d, type: 2}
   - {fileID: 2100000, guid: 921663dfebf9c824f8503f6b137800de, type: 2}
   - {fileID: 2100000, guid: 3de20cd2bfe6ad54995bad6ff86711bd, type: 2}
-  - {fileID: 2100000, guid: c9a70623c7755814f84a80d5bf2e44fa, type: 2}
+  - {fileID: 2100000, guid: 406cca44f71a4eb43a155584d666aa31, type: 2}
   - {fileID: 2100000, guid: 3184a7f77f4b37649a71f8a71dcffa12, type: 2}
   - {fileID: 2100000, guid: fa6668f31c28422448789850cd2a71fc, type: 2}
   m_StaticBatchInfo:
@@ -5591,7 +5591,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8111738755899062295}

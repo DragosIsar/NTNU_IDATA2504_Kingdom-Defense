@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3bd51fb159c8d54496a5cfe70432799, type: 3}
   m_Name: AxeEnemy Buffed
   m_EditorClassIdentifier: 
-  speed: 2
-  damage: 2
+  speed: 3
+  damage: 10
   health: 30
   reward: 3
   deathEffect: {fileID: 7581132033923737324, guid: 70a3fedfbc4391b4aa05fa6cca5a7017,

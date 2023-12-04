@@ -17,9 +17,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private AudioClip hitSound;
 
     private int _currentHealth;
+    private float _speed;
     private Rigidbody _rigidbody;
     private int _targetIndex;
     private List<Transform> _pathPositions;
+    private bool _isBuffed;
     
     private static readonly int _GET_HIT = Animator.StringToHash("getHit");
 
@@ -28,6 +30,7 @@ public class Enemy : MonoBehaviour
         _currentHealth = enemyType.health;
         animator ??= GetComponentInChildren<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
+        _speed = enemyType.speed;
     }
     
     private void Update()
@@ -49,7 +52,7 @@ public class Enemy : MonoBehaviour
 
         transform.rotation = Quaternion.LookRotation(dir);
 
-        _rigidbody.velocity = transform.forward * enemyType.speed;
+        _rigidbody.velocity = transform.forward * _speed;
     }
 
     private bool IsAtTarget ()
@@ -119,5 +122,13 @@ public class Enemy : MonoBehaviour
     public int GetHealth()
     {
         return _currentHealth;
+    }
+
+    public void Buff(float multiplier)
+    {
+        if (_isBuffed) return;
+        _isBuffed = true;
+        _speed *= multiplier;
+        _currentHealth *= (int)multiplier;
     }
 }

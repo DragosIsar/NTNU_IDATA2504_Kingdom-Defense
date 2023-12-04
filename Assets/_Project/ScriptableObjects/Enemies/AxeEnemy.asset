@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3bd51fb159c8d54496a5cfe70432799, type: 3}
   m_Name: AxeEnemy
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 2
   damage: 1
   health: 10
   reward: 1
